@@ -1,0 +1,36 @@
+.footer {
+    background-color: #3bb19b;
+    color: white;
+    padding: 20px;
+}
+
+.footer_content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer_links {
+    display: flex;
+}
+
+.footer_link {
+    color: white;
+    text-decoration: none;
+    margin-right: 20px;
+}
+
+.footer_social {
+    display: flex;
+}
+
+.social_link {
+    color: white;
+    text-decoration: none;
+    margin-right: 20px;
+}
+
+.footer_bottom {
+    margin-top: 20px;
+    text-align: center;
+}
