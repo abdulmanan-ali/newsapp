@@ -1,7 +1,20 @@
 .footer {
-    background-color: #3bb19b;
+    background-color: #02044A;
     color: white;
     padding: 20px;
+    margin-top: auto;
+    /* Maintain for potential edge cases */
+}
+
+.main-container {
+    margin-bottom: 0;
+    /* Remove any potential margin-bottom */
+}
+
+.footer_content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .footer_content {
@@ -31,6 +44,5 @@
 }
 
 .footer_bottom {
-    margin-top: 20px;
     text-align: center;
 }

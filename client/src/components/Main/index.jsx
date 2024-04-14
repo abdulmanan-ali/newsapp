@@ -6,7 +6,7 @@ import Navbar from "../Navbar";
 const Main = () => {
     return (
         <>
-            <Navbar />
+            {/* <Navbar /> */}
             {/* <Blogs /> */}
             
             {/* <Footer /> */}

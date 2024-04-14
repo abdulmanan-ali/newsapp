@@ -19,13 +19,15 @@ const BlogContent = ({ blogs }) => {
                 <div className='grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-1 ss:grid-cols-1 md:gap-x-8 sm:gap-y-8 ss:gap-y-8 px-4 sm:pt-20 md:mt-0 ss:pt-20 text-black'>
                     <div className='col-span-2'>
                         <img
-                            className='h-56 w-full object-cover'
-                            src={`http://localhost:1337${blog.attributes?.coverImg?.data?.attributes?.url}`}
-                            alt={blog.attributes?.blogTitle}
+                            className='h-60 w-full object-cover'
+                            src={`http://localhost:1337${blog.attributes.coverImage.data.attributes.url}`}
+                            alt={blog.attributes.blogTitle}
                         />
                         <h1 className='font-bold text-2xl my-1 pt-5'>{blog.attributes?.blogTitle}</h1>
-                        <div className='pt-5'>
-                            <ReactMarkdown className='line-break'>{blog.attributes?.blogContent}</ReactMarkdown>
+                        <div className="pros">
+                            <div className='pt-5'>
+                                <ReactMarkdown className='line-break'>{blog.attributes.blogContent}</ReactMarkdown>
+                            </div>
                         </div>
                     </div>
 
