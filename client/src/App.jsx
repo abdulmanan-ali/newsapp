@@ -4,13 +4,16 @@ import Signup from "./components/Signup";
 import Login from "./components/Login";
 import { Homepage, BlogContentPage } from "./pages";
 import useFetch from './hooks/useFetch'
-// import { ToastContainer, toast } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
-
+// import { useTranslation } from 'i18n';
 function App() {
+
+	// const { t } = useTranslation()
+
 	let { loading, data, error } = useFetch('http://localhost:1337/api/blogs?populate=*')
 	if (loading) return <p>Loading...</p>
 	if (error) return <p>Error!</p>
+
+
 	// const notify = () => toast("Wow so easy!");
 
 	// return (
@@ -22,6 +25,10 @@ function App() {
 	const user = localStorage.getItem("token");
 
 	return (
+		<>
+		<div>
+		<h1>Hello world</h1>
+		</div>
 		<Routes>
 			{user && <Route path="/" exact element={<Homepage blogs={data ? data : ""} />} />}
 			<Route path="/signup" exact element={<Signup />} />
@@ -30,6 +37,7 @@ function App() {
 			{/* <Route path='/' element={<Homepage blogs={data ? data : ""} />}></Route> */}
 			<Route path='/blog/:id' element={<BlogContentPage blogs={data ? data : ""} />}></Route>
 		</Routes>
+		</>
 	);
 }
 
