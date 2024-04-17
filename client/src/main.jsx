@@ -1,17 +1,53 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
-// import "./i18n.js"
-
-
-// import ReactDOM from 'react-dom';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App.jsx';
+import './index.css';
 import { BrowserRouter } from 'react-router-dom';
+import { I18nextProvider } from 'react-i18next';
+import i18next from 'i18next';
+import enTranslation from './locales/en.json'; // Import your English translation file
+import urTranslation from './locales/ur.json'; // Import your Urdu translation file
+
+// Initialize i18next
+i18next.init({
+  interpolation: { escapeValue: false },
+  lng: 'en', // Default language
+  resources: {
+    en: {
+      translation: enTranslation,
+    },
+    ur: {
+      translation: urTranslation,
+    },
+  },
+});
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
-    <App />
-    </BrowserRouter>,
+      <I18nextProvider i18n={i18next}>
+        <App />
+      </I18nextProvider>
+    </BrowserRouter>
   </React.StrictMode>,
-)
+);
+
+
+
+// import React from 'react'
+// import ReactDOM from 'react-dom/client'
+// import App from './App.jsx'
+// import './index.css'
+// // import "./i18n.js"
+
+
+// // import ReactDOM from 'react-dom';
+// import { BrowserRouter } from 'react-router-dom';
+
+// ReactDOM.createRoot(document.getElementById('root')).render(
+//   <React.StrictMode>
+//     <BrowserRouter>
+//     <App />
+//     </BrowserRouter>,
+//   </React.StrictMode>,
+// )
