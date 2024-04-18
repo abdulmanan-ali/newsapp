@@ -5,22 +5,22 @@ import './index.css';
 import { BrowserRouter } from 'react-router-dom';
 import { I18nextProvider } from 'react-i18next';
 import i18next from 'i18next';
-import enTranslation from './locales/en.json'; // Import your English translation file
-import urTranslation from './locales/ur.json'; // Import your Urdu translation file
+// import enTranslation from './locales/en.json'; // Import your English translation file
+// import urTranslation from './locales/ur.json'; // Import your Urdu translation file
 
 // Initialize i18next
-i18next.init({
-  interpolation: { escapeValue: false },
-  lng: 'en', // Default language
-  resources: {
-    en: {
-      translation: enTranslation,
-    },
-    ur: {
-      translation: urTranslation,
-    },
-  },
-});
+// i18next.init({
+//   interpolation: { escapeValue: false },
+//   lng: 'en', // Default language
+//   resources: {
+//     en: {
+//       translation: enTranslation,
+//     },
+//     ur: {
+//       translation: urTranslation,
+//     },
+//   },
+// });
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

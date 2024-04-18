@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useTranslation } from 'react-i18next';
+// import { useTranslation } from 'react-i18next';
 
 
 const Navbar = () => {
 
-  const { t } = useTranslation('navbar');
+  // const { t } = useTranslation('navbar');
 
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
 
@@ -20,7 +20,7 @@ const Navbar = () => {
         <h1 className="text-xl font-bold">Multilingual News</h1>
         <div className="flex space-x-4 items-center">
           <div className="flex space-x-4">
-            <Link to="/" className="hover:underline">{t('home')}</Link>
+            <Link to="/" className="hover:underline">Home</Link>
             <Link to="/news" className="hover:underline">News</Link>
             <a href="/sport" className="hover:underline">Sport</a>
             <a href="/earth" className="hover:underline">Earth</a>

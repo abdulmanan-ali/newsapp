@@ -25,7 +25,7 @@ const BlogContent = ({ blogs }) => {
                         />
                         <h1 className='font-bold text-2xl my-1 pt-5'>{blog.attributes?.blogTitle}</h1>
                         <div className="pros">
-                            <div className='pt-5'>
+                            <div className='pt-6'>
                                 <ReactMarkdown className='line-break'>{blog.attributes.blogContent}</ReactMarkdown>
                             </div>
                         </div>
