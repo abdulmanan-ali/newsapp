@@ -7,7 +7,7 @@ import useFetch from './hooks/useFetch'
 // import { useTranslation } from 'i18n';
 function App() {
 
-	// const { t } = useTranslation()
+	// const { t } = useTranslation();
 
 	let { loading, data, error } = useFetch('http://localhost:1337/api/blogs?populate=*')
 	if (loading) return <p>Loading...</p>
