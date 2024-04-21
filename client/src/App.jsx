@@ -4,6 +4,9 @@ import Signup from "./components/Signup";
 import Login from "./components/Login";
 import { Homepage, BlogContentPage } from "./pages";
 import useFetch from './hooks/useFetch'
+import AddArticle from "./components/AddArticle";
+import Navbar  from "./components/Navbar";
+import Footer from "./components/Footer"
 // import { useTranslation } from 'i18n';
 function App() {
 
@@ -26,17 +29,18 @@ function App() {
 
 	return (
 		<>
-		<div>
-		{/* <h1>Hello world</h1> */}
-		</div>
-		<Routes>
-			{user && <Route path="/" exact element={<Homepage blogs={data ? data : ""} />} />}
-			<Route path="/signup" exact element={<Signup />} />
-			<Route path="/login" exact element={<Login />} />
-			<Route path="/" element={<Navigate replace to="/login" />} />
-			{/* <Route path='/' element={<Homepage blogs={data ? data : ""} />}></Route> */}
-			<Route path='/blog/:id' element={<BlogContentPage blogs={data ? data : ""} />}></Route>
-		</Routes>
+
+			<Navbar />
+			<Routes>
+				{user && <Route path="/" exact element={<Homepage blogs={data ? data : ""} />} />}
+				<Route path="/signup" exact element={<Signup />} />
+				<Route path="/login" exact element={<Login />} />
+				<Route path="/addarticle" exact element={<AddArticle />} />
+				<Route path="/" element={<Navigate replace to="/login" />} />
+				{/* <Route path='/' element={<Homepage blogs={data ? data : ""} />}></Route> */}
+				<Route path='/blog/:id' element={<BlogContentPage blogs={data ? data : ""} />}></Route>
+			</Routes>
+			<Footer />
 		</>
 	);
 }

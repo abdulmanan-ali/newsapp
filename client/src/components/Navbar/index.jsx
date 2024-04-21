@@ -21,12 +21,13 @@ const Navbar = () => {
         <div className="flex space-x-4 items-center">
           <div className="flex space-x-4">
             <Link to="/" className="hover:underline">Home</Link>
-            <Link to="/news" className="hover:underline">News</Link>
+            {/* <Link to="/news" className="hover:underline">News</Link> */}
             <a href="/sport" className="hover:underline">Sport</a>
             <a href="/earth" className="hover:underline">Earth</a>
             <a href="/worklife" className="hover:underline">Worklife</a>
             <a href="/travel" className="hover:underline">Travel</a>
             <a href="/culture" className="hover:underline">Culture</a>
+            <Link to="/addarticle" className="hover:underline">AddArticle</Link>
           </div>
           {/* Dropdown for language selection */}
           <div className="relative inline-block text-left">
