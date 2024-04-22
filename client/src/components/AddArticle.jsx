@@ -68,9 +68,11 @@ const AddArticle = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-center mb-8">Add Article</h1>
+      <h1 className="text-3xl font-bold text-center mt-9 mb-8">Add Article</h1>
 
-      <form className="grid grid-cols-1 gap-6 bg-white rounded-lg shadow-md p-6" onSubmit={handleSubmit}>
+      {/* <h1 className="text-3xl font-bold text-center mb-8">Add Article</h1> */}
+
+      <form className="grid grid-cols-1 gap-6 bg-white rounded-lg shadow-md p-9" onSubmit={handleSubmit}>
         {/* Title Field */}
         <div>
           <label htmlFor="blogTitle" className="block text-sm font-medium text-gray-700">
