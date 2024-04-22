@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 const AddArticle = () => {
   const [formData, setFormData] = useState({
     blogTitle: '',
     blogDesc: '',
     blogContent: '',
-    coverImage: null, // Store image as a file object
+    coverImage: "", // Store image as a file object
   });
 
   const handleChange = (event) => {
@@ -18,30 +19,52 @@ const AddArticle = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+  
     const formDataToSend = new FormData(); // Use FormData for multipart data
-    formDataToSend.append('blogTitle', formData.blogTitle);
-    formDataToSend.append('blogDesc', formData.blogDesc);
-    formDataToSend.append('blogContent', formData.blogContent);
-    formDataToSend.append('coverImage', formData.coverImage); // Append image file
-
+    formDataToSend.append('data', JSON.stringify({
+      blogTitle: formData.blogTitle,
+      blogDesc: formData.blogDesc,
+      blogContent: formData.blogContent,
+    }));
+    formDataToSend.append('files.coverImage', formData.coverImage); // Append image file
+  
     try {
-      const response = await fetch('http://localhost:1337/api/blogs/', {
-        method: 'POST',
-        body: formDataToSend,
+      const response = await axios.post('http://localhost:1337/api/blogs/', formDataToSend, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
       });
-
-      if (!response.ok) {
-        throw new Error(`Error adding article: ${response.statusText}`);
-      }
-
-      console.log('Article added successfully!');
+  
+      console.log('Article added successfully!', response.data);
       // Handle successful submission (e.g., clear form, show success message)
     } catch (error) {
       console.error('Error adding article:', error);
       // Handle errors (e.g., display error message to user)
     }
   };
+  
+
+  // const handleSubmit = async (event) => {
+  //   event.preventDefault();
+
+  //   const formDataToSend = new FormData(); // Use FormData for multipart data
+  //   formDataToSend.append('blogTitle', formData.blogTitle);
+  //   formDataToSend.append('blogDesc', formData.blogDesc);
+  //   formDataToSend.append('blogContent', formData.blogContent);
+  //   formDataToSend.append('coverImage', formData.coverImage); // Append image file
+
+  //   const dataToSend = { data: Object.fromEntries(formDataToSend) };
+
+  //   try {
+  //     const response = await axios.post('http://localhost:1337/api/blogs/', dataToSend);
+
+  //     console.log('Article added successfully!', response.data);
+  //     // Handle successful submission (e.g., clear form, show success message)
+  //   } catch (error) {
+  //     console.error('Error adding article:', error);
+  //     // Handle errors (e.g., display error message to user)
+  //   }
+  // };
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -122,6 +145,3 @@ const AddArticle = () => {
 };
 
 export default AddArticle;
-
-
-
