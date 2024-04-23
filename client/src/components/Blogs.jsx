@@ -18,7 +18,7 @@ const Blogs = ({ blogs }) => {
                                     />
                                     <div className='p-8'>
                                         <h3 className='font-bold text-2xl my-1'>{blog.attributes.blogTitle}</h3>
-                                        <p className='text-gray-600 text-xl'>{blog.attributes.blogDesc}</p>
+                                        {/* <p className='text-gray-600 text-xl'>{blog.attributes.blogDesc}</p> */}
                                     </div>
                                 </div>
                             </Link>

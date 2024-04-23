@@ -25,6 +25,7 @@ const AddArticle = () => {
       blogTitle: formData.blogTitle,
       blogDesc: formData.blogDesc,
       blogContent: formData.blogContent,
+      publishedAt:null
     }));
     formDataToSend.append('files.coverImage', formData.coverImage); // Append image file
   
