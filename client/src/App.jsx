@@ -5,9 +5,12 @@ import Login from "./components/Login";
 import { Homepage, BlogContentPage } from "./pages";
 import useFetch from './hooks/useFetch'
 import AddArticle from "./components/AddArticle";
-import Navbar  from "./components/Navbar";
+import Navbar from "./components/Navbar";
 import Footer from "./components/Footer"
-// import { useTranslation } from 'i18n';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 function App() {
 
 	// const { t } = useTranslation();
@@ -31,15 +34,18 @@ function App() {
 		<>
 
 			<Navbar />
-			<Routes>
-				{user && <Route path="/" exact element={<Homepage blogs={data ? data : ""} />} />}
-				<Route path="/signup" exact element={<Signup />} />
-				<Route path="/login" exact element={<Login />} />
-				<Route path="/addarticle" exact element={<AddArticle />} />
-				<Route path="/" element={<Navigate replace to="/login" />} />
-				{/* <Route path='/' element={<Homepage blogs={data ? data : ""} />}></Route> */}
-				<Route path='/blog/:id' element={<BlogContentPage blogs={data ? data : ""} />}></Route>
-			</Routes>
+			<div className="App">
+				<ToastContainer />
+				<Routes>
+					{user && <Route path="/" exact element={<Homepage blogs={data ? data : ""} />} />}
+					<Route path="/signup" exact element={<Signup />} />
+					<Route path="/login" exact element={<Login />} />
+					<Route path="/addarticle" exact element={<AddArticle />} />
+					<Route path="/" element={<Navigate replace to="/login" />} />
+					{/* <Route path='/' element={<Homepage blogs={data ? data : ""} />}></Route> */}
+					<Route path='/blog/:id' element={<BlogContentPage blogs={data ? data : ""} />}></Route>
+				</Routes>
+			</div>
 			<Footer />
 		</>
 	);
