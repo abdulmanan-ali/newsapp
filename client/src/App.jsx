@@ -9,60 +9,118 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer"
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useState, useEffect } from 'react';
 
 
 function App() {
+  const [categories, setCategories] = useState([]); // State for categories
+  const [blogs, setBlogs] = useState(null); // Placeholder for blogs
+
+  useEffect(() => {
+    const fetchCategories = async () => { // Fetch categories on mount
+      const response = await axios.get('http://localhost:1337/api/categories');
+      setCategories(response.data);
+    };
+
+    fetchCategories();
+  }, []);
+
+  let { loading, data, error } = useFetch('http://localhost:1337/api/blogs?populate=*');
+  if (loading) return <p>Loading...</p>
+  if (error) return <p>Error!</p>
 
 
-	// const [blogs, setBlogs] = useState(null);
-	// const [categories, setCategories] = useState(null);
+  const user = localStorage.getItem("token");
 
-	// useEffect(() => {
-	// 	const fetchBlogs = async () => {
-	// 		const response = await axios.get('http://localhost:1337/api/blogs?populate=*');
-	// 		setBlogs(response.data);
-	// 	};
-
-	// 	const fetchCategories = async () => {
-	// 		const response = await axios.get('http://localhost:1337/api/categories');
-	// 		setCategories(response.data);
-	// 	};	
-
-	// 	fetchBlogs();
-	// 	fetchCategories();
-	// }, []);
-
-
-	let { loading, data, error } = useFetch('http://localhost:1337/api/blogs?populate=*')
-	if (loading) return <p>Loading...</p>
-	if (error) return <p>Error!</p>
-
-
-	// );
-	const user = localStorage.getItem("token");
-
-	return (
-		<>
-
-			<Navbar />
-			<div className="App">
-				<ToastContainer />
-				<Routes>
-					{user && <Route path="/" exact element={<Homepage blogs={data ? data : ""} />} />}
-					<Route path="/signup" exact element={<Signup />} />
-					<Route path="/login" exact element={<Login />} />
-					<Route path="/addarticle" exact element={<AddArticle />} />
-					<Route path="/" element={<Navigate replace to="/login" />} />
-					{/* <Route path='/' element={<Homepage blogs={data ? data : ""} />}></Route> */}
-					<Route path='/news/en/:id' element={<BlogContentPage blogs={data ? data : ""} />}></Route>
-				</Routes>
-			</div>
-			<Footer />
-		</>
-	);
+  return (
+    <>
+      <Navbar categories={categories} />  {/* Pass categories to Navbar */}
+      <div className="App">
+        <ToastContainer />
+        <Routes>
+          {user && <Route path="/" exact element={<Homepage blogs={data ? data : ""} />} />}
+          {user && <Route path="/sports" exact element={<Homepage blogs={data ? data : ""} />} />}
+          <Route path="/signup" exact element={<Signup />} />
+          <Route path="/login" exact element={<Login />} />
+          <Route path="/addarticle" exact element={<AddArticle />} />
+          <Route path="/" element={<Navigate replace to="/login" />} />
+          {/* <Route path='/' element={<Homepage blogs={data ? data : ""} />}></Route> */}
+          {/* <Route path='/news/en/:id' element={<BlogContentPage blogs={data ? data : ""} />}></Route> */}
+          <Route path="/category/:categoryId" element={<BlogContentPage blogs={data ? data : ""} />} />  {/* Dynamic route for categories */}
+        </Routes>
+      </div>
+      <Footer />
+    </>
+  );
 }
 
 export default App;
+
+
+
+
+// import { Route, Routes, Navigate } from "react-router-dom";
+// import axios from 'axios'
+// import Signup from "./components/Signup";
+// import Login from "./components/Login";
+// import { Homepage, BlogContentPage } from "./pages";
+// import useFetch from './hooks/useFetch'
+// import AddArticle from "./components/AddArticle";
+// import Navbar from "./components/Navbar";
+// import Footer from "./components/Footer"
+// import { ToastContainer } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
+// import { useState, useEffect } from 'react';
+
+
+
+// function App() {
+
+
+// 	// const [categories, setCategories] = useState([]);
+// 	// const [blogs, setBlogs] = useState(null); // Placeholder for blogs
+
+// 	// useEffect(() => {
+// 	// 	const fetchCategories = async () => {
+// 	// 		const response = await axios.get('http://localhost:1337/api/categories');
+// 	// 		setCategories(response.data);
+// 	// 	};
+
+// 	// 	fetchCategories();
+// 	// }, []);
+
+
+// 	// let { loading, data, error } = useFetch('http://localhost:1337/api/blogs?populate=*')
+// let { loading, data, error } = useFetch('http://localhost:1337/api/blogs?populate=*&filters[categories][Name][$eq]=Sports')
+// if (loading) return <p>Loading...</p>
+// if (error) return <p>Error!</p>
+
+
+// 	// );
+// 	const user = localStorage.getItem("token");
+
+// 	return (
+// 		<>
+
+// 			<Navbar />
+// <div className="App">
+// 	<ToastContainer />
+// 	<Routes>
+// 		{user && <Route path="/" exact element={<Homepage blogs={data ? data : ""} />} />}
+// 		<Route path="/signup" exact element={<Signup />} />
+// 		<Route path="/login" exact element={<Login />} />
+// 		<Route path="/addarticle" exact element={<AddArticle />} />
+// 		<Route path="/" element={<Navigate replace to="/login" />} />
+// 		{/* <Route path='/' element={<Homepage blogs={data ? data : ""} />}></Route> */}
+// 		<Route path='/news/en/:id' element={<BlogContentPage blogs={data ? data : ""} />}></Route>
+// 	</Routes>
+// </div>
+// 			<Footer />
+// 		</>
+// 	);
+// }
+
+// export default App;
 
 // import React, { useState, useEffect } from 'react';
 // import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';

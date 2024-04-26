@@ -21,8 +21,7 @@ const Navbar = () => {
         <div className="flex space-x-4 items-center">
           <div className="flex space-x-4">
             <Link to="/" className="hover:underline">Home</Link>
-            {/* <Link to="/news" className="hover:underline">News</Link> */}
-            <a href="/sport" className="hover:underline">Sport</a>
+            <Link to="/sports" className="hover:underline">Sports</Link>
             <a href="/earth" className="hover:underline">Earth</a>
             <a href="/worklife" className="hover:underline">Worklife</a>
             <a href="/travel" className="hover:underline">Travel</a>
