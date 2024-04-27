@@ -7,16 +7,19 @@ const AddArticle = () => {
     blogTitle: '',
     blogDesc: '',
     blogContent: '',
-    coverImage: '', // Store image as a file object
+    coverImage: null,
+    authorImg: null,
+    authorName: '',
+    authorDesc: '',
   });
 
   const [error, setError] = useState('');
 
   const handleChange = (event) => {
     if (event.target.type === 'file') {
-      setFormData({ ...formData, coverImage: event.target.files[0] }); // Store uploaded image
+      setFormData({ ...formData, [event.target.name]: event.target.files[0] });
     } else {
-      setFormData({ ...formData, [event.target.name]: event.target.value }); // Handle other form fields
+      setFormData({ ...formData, [event.target.name]: event.target.value });
     }
   };
 
@@ -24,7 +27,7 @@ const AddArticle = () => {
     event.preventDefault();
 
     // Check if required fields are filled out
-    if (!formData.blogTitle || !formData.blogContent || !formData.coverImage) {
+    if (!formData.blogTitle || !formData.blogContent || !formData.coverImage || !formData.authorImg) {
       setError('Please fill out all required fields');
       return;
     }
@@ -34,9 +37,12 @@ const AddArticle = () => {
       blogTitle: formData.blogTitle,
       blogDesc: formData.blogDesc,
       blogContent: formData.blogContent,
+      authorName: formData.authorName,
+      authorDesc: formData.authorDesc,
       publishedAt: null,
     }));
-    formDataToSend.append('files.coverImage', formData.coverImage); // Append image file
+    formDataToSend.append('files.coverImage', formData.coverImage); // Append cover image file
+    formDataToSend.append('files.authorImg', formData.authorImg); // Append author image file
 
     try {
       const response = await axios.post('http://localhost:1337/api/blogs/', formDataToSend, {
@@ -123,6 +129,51 @@ const AddArticle = () => {
           />
         </div>
 
+        <div>
+          <label htmlFor="blogTitle" className="block text-sm font-medium text-gray-700">
+            Your Name (English)
+          </label>
+          <input
+            type="text"
+            id="authorName"
+            name="authorName"
+            value={formData.authorName}
+            onChange={handleChange}
+            className="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            required
+          />
+        </div>
+
+        <div>
+          <label htmlFor="blogTitle" className="block text-sm font-medium text-gray-700">
+            Desc (English)
+          </label>
+          <input
+            type="text"
+            id="authorDesc"
+            name="authorDesc"
+            value={formData.authorDesc}
+            onChange={handleChange}
+            className="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            required
+          />
+        </div>
+
+        <div>
+          <label htmlFor="coverImage" className="block text-sm font-medium text-gray-700">
+            Upload Your Image
+          </label>
+          <input
+            type="file"
+            id="authorImg"
+            name="authorImg"
+            accept="image/*"
+            onChange={handleChange}
+            className="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            required
+          />
+        </div>
+
         {/* Error message */}
         {error && <p className="text-red-500">{error}</p>}
 
@@ -141,6 +192,7 @@ const AddArticle = () => {
 };
 
 export default AddArticle;
+
 
 
 
