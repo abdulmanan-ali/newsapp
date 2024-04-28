@@ -1,56 +1,493 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 
 const BlogContent = ({ blogs }) => {
-    console.log("Blog Object");
+  const { id } = useParams();
 
-    const { id } = useParams();
+  let blog = {};
+  if (blogs?.data) {
+    const arr = blogs.data.filter((blog) => blog.id == id);
+    blog = arr[0];
+  }
 
-    let blog = {};
-    if (blogs?.data) {
-        const arr = blogs.data.filter((blog) => blog.id == id);
-        blog = arr[0];
+  // State for comment form
+  const [commentFormData, setCommentFormData] = useState({
+    name: '',
+    image: null,
+    comment: '',
+  });
+
+  // State for storing comments
+  const [comments, setComments] = useState([]);
+
+  // Handle change in comment form
+  const handleCommentChange = (event) => {
+    const value = event.target.type === 'file' ? event.target.files[0] : event.target.value;
+    setCommentFormData({ ...commentFormData, [event.target.name]: value });
+  };
+
+  // Handle submit of comment form
+  const handleCommentSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const formDataToSend = new FormData();
+      formDataToSend.append('data', JSON.stringify({
+        Name: commentFormData.name,
+        Comment: [
+          {
+            "type": "paragraph",
+            "children": [
+              {
+                "text": commentFormData.comment,
+                "type": "text"
+              }
+            ]
+          }
+        ],
+        blog: id // Include the blog ID here
+      }));
+      if (commentFormData.image) {
+        formDataToSend.append('files.Image', commentFormData.image);
+      }
+
+      const response = await fetch('http://localhost:1337/comments', {
+        method: 'POST',
+        body: formDataToSend
+      });
+
+      if (!response.ok) {
+        throw new Error('Error submitting comment:', response.statusText);
+      }
+
+      const newComment = await response.json();
+      setComments([...comments, newComment]); // Update comments state
+      // Clear the form after submission
+      setCommentFormData({
+        name: '',
+        image: null,
+        comment: '',
+      });
+    } catch (error) {
+      console.error(error);
     }
+  };
 
-    return (
-        <div className='w-full pb-10 bg-[#f9f9f9]'>
-            <div className='max-w-[1240px] mx-auto'>
-                <div className='grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-1 ss:grid-cols-1 md:gap-x-8 sm:gap-y-8 ss:gap-y-8 px-4 sm:pt-20 md:mt-0 ss:pt-20 text-black'>
-                    <div className='col-span-2'>
-                        <img
-                            className='h-60 w-full object-cover'
-                            src={`http://localhost:1337${blog.attributes.coverImage.data.attributes.url}`}
-                            alt={blog.attributes.blogTitle}
-                        />
-                        <h1 className='font-bold text-2xl my-1 pt-5'>{blog.attributes?.blogTitle}</h1>
-                        <div className="pros">
-                            <div className='pt-6'>
-                                <ReactMarkdown className='line-break'>{blog.attributes.blogContent}</ReactMarkdown>
-                            </div>
-                        </div>
-                    </div>
+  // Fetch comments on blog post load
+  useEffect(() => {
+    const fetchComments = async () => {
+      try {
+        const response = await fetch(`http://localhost:1337/comments?filters[blog][id][$eq]=${id}`);
+        if (!response.ok) {
+          throw new Error('Error fetching comments:', response.statusText);
+        }
+        const commentsData = await response.json();
+        setComments(commentsData.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchComments();
+  }, [id]);
 
-                    <div className='items-center w-full bg-white rounded-xl drop-shadow-md py-5 max-h-[250px]'>
-                        {blog.attributes?.authorImg?.data?.attributes?.url && (
-                            <div>
-                                <img
-                                    className='p-2 w-32 h-32 rounded-full mx-auto object-cover'
-                                    src={`http://localhost:1337${blog.attributes.authorImg.data.attributes.url}`}
-                                    alt={blog.attributes?.authorName}
-                                />
-                                <h1 className='font-bold text-2xl text-center text-gray-900 pt-3'>{blog.attributes?.authorName}</h1>
-                                <p className='text-center text-gray-900 font-medium'>{blog.attributes?.authorDesc}</p>
-                            </div>
-                        )}
-                    </div>
-                </div>
+  return (
+    <div className='w-full pb-10 bg-[#f9f9f9]'>
+      <div className='max-w-[1240px] mx-auto'>
+        <div className='grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-1 ss:grid-cols-1 md:gap-x-8 sm:gap-y-8 ss:gap-y-8 px-4 sm:pt-20 md:mt-0 ss:pt-20 text-black'>
+          <div className='col-span-2'>
+            <img
+              className='h-100 w-full object-cover'
+              src={`http://localhost:1337${blog.attributes?.coverImage.data.attributes.url}`}
+              alt={blog.attributes?.blogTitle}
+            />
+            <h1 className='font-bold text-3xl my-1 pt-5'>{blog.attributes?.blogTitle}</h1>
+            <div className="pros">
+              <div className='pt-6'>
+                {/* Wrap blogContent in a custom CSS class if needed */}
+                <ReactMarkdown className="my-markdown">{blog.attributes?.blogContent}</ReactMarkdown>
+              </div>
             </div>
+
+            {/* Comment Section */}
+            <div className="mt-8 border-t pt-8">
+              <h2 className="text-xl font-semibold mb-4">Leave a Comment</h2>
+              <form onSubmit={handleCommentSubmit}>
+                <div className="mb-4">
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={commentFormData.name}
+                    onChange={handleCommentChange}
+                    className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+                    required
+                  />
+                </div>
+                <div className="mb-4">
+                  <label htmlFor="image" className="block text-sm font-medium text-gray-700">Choose Image</label>
+                  <input
+                    type="file"
+                    id="image"
+                    name="image"
+                    accept="image/*"
+                    onChange={handleCommentChange}
+                    className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+                  />
+                </div>
+                <div className="mb-4">
+                  <label htmlFor="comment" className="block text-sm font-medium text-gray-700">Comment</label>
+                  <textarea
+                    id="comment"
+                    name="comment"
+                    value={commentFormData.comment}
+                    onChange={handleCommentChange}
+                    className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+                    rows="4"
+                    required
+                  ></textarea>
+                </div>
+                <div className="text-center">
+                  <button
+                    type="submit"
+                    className="bg-indigo-500 text-white py-2 px-4 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600"
+                  >
+                    Submit
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            {/* Display Comments */}
+            {comments.length > 0 && (
+              <div className="mt-8 border-t pt-8">
+                <h2 className="text-xl font-semibold mb-4">Comments</h2>
+                {comments.map((comment, index) => (
+                  <div key={index} className="flex items-start space-x-4 mb-4">
+                    {comment.Image && (
+                      <img
+                        src={`http://localhost:1337${comment.Image[0]?.url}`}
+                        alt="Commenter"
+                        className="w-12 h-12 rounded-full object-cover"
+                      />
+                    )}
+                    <div>
+                      <p className="font-semibold">{comment.Name}</p>
+                      <p>{comment.Comment[0]?.children[0]?.text}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* Empty State Handling */}
+            {comments.length === 0 && (
+              <div className="mt-8">
+                <p>No comments yet. Be the first to leave one!</p>
+              </div>
+            )}
+          </div>
+
+          <div className='items-center w-full bg-white rounded-xl drop-shadow-md py-5 max-h-[220px]'>
+            {blog.attributes?.authorImg?.data?.attributes?.url && (
+              <div>
+                <img
+                  className='p-2 w-32 h-32 rounded-full mx-auto object-cover'
+                  src={`http://localhost:1337${blog.attributes.authorImg.data.attributes.url}`}
+                  alt={blog.attributes?.authorName}
+                />
+                <h1 className='font-bold text-1xl text-center text-gray-900 pt-3'>{blog.attributes?.authorName}</h1>
+                <p className='text-center text-gray-900 font-medium'>{blog.attributes?.authorDesc}</p>
+              </div>
+            )}
+          </div>
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default BlogContent;
+
+
+
+
+// import React, { useState } from 'react';
+// import { useParams } from 'react-router-dom';
+// import ReactMarkdown from 'react-markdown'; // Assuming correct import
+
+// const BlogContent = ({ blogs }) => {
+//   const { id } = useParams();
+
+//   let blog = {};
+//   if (blogs?.data) {
+//     const arr = blogs.data.filter((blog) => blog.id == id);
+//     blog = arr[0];
+//   }
+
+//   // State for comment form
+//   const [commentFormData, setCommentFormData] = useState({
+//     name: '',
+//     image: '',
+//     comment: '',
+//   });
+
+//   // State for storing comments
+//   const [comments, setComments] = useState([]);
+
+//   // Handle change in comment form
+//   const handleCommentChange = (event) => {
+//     const value = event.target.type === 'file' ? event.target.files[0] : event.target.value;
+//     setCommentFormData({ ...commentFormData, [event.target.name]: value });
+//   };
+
+//   // Handle submit of comment form
+//   const handleCommentSubmit = (event) => {
+//     event.preventDefault();
+//     // Add the new comment to the comments array
+//     setComments([
+//       ...comments,
+//       {
+//         id: comments.length + 1,
+//         name: commentFormData.name,
+//         image: commentFormData.image ? URL.createObjectURL(commentFormData.image) : null,
+//         comment: commentFormData.comment,
+//       },
+//     ]);
+//     // Clear the form after submission
+//     setCommentFormData({
+//       name: '',
+//       image: '',
+//       comment: '',
+//     });
+//   };
+
+//   return (
+//     <div className='w-full pb-10 bg-[#f9f9f9]'>
+//       <div className='max-w-[1240px] mx-auto'>
+//         <div className='grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-1 ss:grid-cols-1 md:gap-x-8 sm:gap-y-8 ss:gap-y-8 px-4 sm:pt-20 md:mt-0 ss:pt-20 text-black'>
+//           <div className='col-span-2'>
+//             <img
+//               className='h-100 w-full object-cover'
+//               src={`http://localhost:1337${blog.attributes?.coverImage.data.attributes.url}`}
+//               alt={blog.attributes?.blogTitle}
+//             />
+//             <h1 className='font-bold text-3xl my-1 pt-5'>{blog.attributes?.blogTitle}</h1>
+//             <div className="pros">
+//               <div className='pt-6'>
+//                 {/* Wrap blogContent in a custom CSS class if needed */}
+//                 <ReactMarkdown className="my-markdown">{blog.attributes?.blogContent}</ReactMarkdown>
+//               </div>
+//             </div>
+
+//             {/* Comment Section */}
+//             <div className="mt-8 border-t pt-8">
+//               <h2 className="text-xl font-semibold mb-4">Leave a Comment</h2>
+//               <form onSubmit={handleCommentSubmit}>
+//                 <div className="mb-4">
+//                   <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
+//                   <input
+//                     type="text"
+//                     id="name"
+//                     name="name"
+//                     value={commentFormData.name}
+//                     onChange={handleCommentChange}
+//                     className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+//                     required
+//                   />
+//                 </div>
+//                 <div className="mb-4">
+//                   <label htmlFor="image" className="block text-sm font-medium text-gray-700">Choose Image</label>
+//                   <input
+//                     type="file"
+//                     id="image"
+//                     name="image"
+//                     accept="image/*"
+//                     onChange={handleCommentChange}
+//                     className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+//                   />
+//                 </div>
+//                 <div className="mb-4">
+//                   <label htmlFor="comment" className="block text-sm font-medium text-gray-700">Comment</label>
+//                   <textarea
+//                     id="comment"
+//                     name="comment"
+//                     value={commentFormData.comment}
+//                     onChange={handleCommentChange}
+//                     className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+//                     rows="4"
+//                     required
+//                   ></textarea>
+//                 </div>
+//                 <div className="text-center">
+//                   <button
+//                     type="submit"
+//                     className="bg-indigo-500 text-white py-2 px-4 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600"
+//                   >
+//                     Submit
+//                   </button>
+//                 </div>
+//               </form>
+//             </div>
+
+//             {/* Display Comments */}
+//             <div className="mt-8 border-t pt-8">
+//               <h2 className="text-xl font-semibold mb-4">Comments</h2>
+//               {comments.map((comment) => (
+//                 <div key={comment.id} className="flex items-start space-x-4 mb-4">
+//                   {comment.image && (
+//                     <img
+//                       src={comment.image}
+//                       alt="Commenter"
+//                       className="w-12 h-12 rounded-full object-cover"
+//                     />
+//                   )}
+//                   <div>
+//                     <p className="font-semibold">{comment.name}</p>
+//                     <p>{comment.comment}</p>
+//                   </div>
+//                 </div>
+//               ))}
+//             </div>
+//           </div>
+
+//           <div className='items-center w-full bg-white rounded-xl drop-shadow-md py-5 max-h-[220px]'>
+//             {blog.attributes?.authorImg?.data?.attributes?.url && (
+//               <div>
+//                 <img
+//                   className='p-2 w-32 h-32 rounded-full mx-auto object-cover'
+//                   src={`http://localhost:1337${blog.attributes.authorImg.data.attributes.url}`}
+//                   alt={blog.attributes?.authorName}
+//                 />
+//                 <h1 className='font-bold text-1xl text-center text-gray-900 pt-3'>{blog.attributes?.authorName}</h1>
+//                 <p className='text-center text-gray-900 font-medium'>{blog.attributes?.authorDesc}</p>
+//               </div>
+//             )}
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default BlogContent;
+
+
+
+
+
+
+
+// import React from 'react';
+// import { useParams } from 'react-router-dom';
+// import ReactMarkdown from 'react-markdown'; // Assuming correct import
+
+// const BlogContent = ({ blogs }) => {
+//   console.log("Blog Object:", blogs); // Check the data structure
+
+//   const { id } = useParams();
+
+//   let blog = {};
+//   if (blogs?.data) {
+//     const arr = blogs.data.filter((blog) => blog.id == id);
+//     blog = arr[0];
+//   }
+
+//   return (
+//     <div className='w-full pb-10 bg-[#f9f9f9]'>
+//       <div className='max-w-[1240px] mx-auto'>
+//         <div className='grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-1 ss:grid-cols-1 md:gap-x-8 sm:gap-y-8 ss:gap-y-8 px-4 sm:pt-20 md:mt-0 ss:pt-20 text-black'>
+//           <div className='col-span-2'>
+//             <img
+//               className='h-100 w-full object-cover'
+//               src={`http://localhost:1337${blog.attributes?.coverImage.data.attributes.url}`}
+//               alt={blog.attributes?.blogTitle}
+//             />
+//             <h1 className='font-bold text-3xl my-1 pt-5'>{blog.attributes?.blogTitle}</h1>
+//             <div className="pros">
+//               <div className='pt-6'>
+//                 {/* Wrap blogContent in a custom CSS class if needed */}
+//                 <ReactMarkdown className="my-markdown">{blog.attributes?.blogContent}</ReactMarkdown>
+//               </div>
+//             </div>
+//           </div>
+//           <div className='items-center w-full bg-white rounded-xl drop-shadow-md py-5 max-h-[220px]'>
+//             {blog.attributes?.authorImg?.data?.attributes?.url && (
+//               <div>
+//                 <img
+//                   className='p-2 w-32 h-32 rounded-full mx-auto object-cover'
+//                   src={`http://localhost:1337${blog.attributes.authorImg.data.attributes.url}`}
+//                   alt={blog.attributes?.authorName}
+//                 />
+//                 <h1 className='font-bold text-1xl text-center text-gray-900 pt-3'>{blog.attributes?.authorName}</h1>
+//                 <p className='text-center text-gray-900 font-medium'>{blog.attributes?.authorDesc}</p>
+//               </div>
+//             )}
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default BlogContent;
+
+
+
+// import React from 'react';
+// import { useParams } from 'react-router-dom';
+// import ReactMarkdown from 'react-markdown';
+
+// const BlogContent = ({ blogs }) => {
+//     console.log("Blog Object");
+
+//     const { id } = useParams();
+
+//     let blog = {};
+//     if (blogs?.data) {
+//         const arr = blogs.data.filter((blog) => blog.id == id);
+//         blog = arr[0];
+//     }
+
+//     return (
+//         <div className='w-full pb-10 bg-[#f9f9f9]'>
+//             <div className='max-w-[1240px] mx-auto'>
+//                 <div className='grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-1 ss:grid-cols-1 md:gap-x-8 sm:gap-y-8 ss:gap-y-8 px-4 sm:pt-20 md:mt-0 ss:pt-20 text-black'>
+//                     <div className='col-span-2'>
+//                         <img
+//                             className='h-60 w-full object-cover'
+//                             src={`http://localhost:1337${blog.attributes.coverImage.data.attributes.url}`}
+//                             alt={blog.attributes.blogTitle}
+//                         />
+//                         <h1 className='font-bold text-2xl my-1 pt-5'>{blog.attributes?.blogTitle}</h1>
+//                         <div className="pros">
+//                             <div className='pt-6'>
+//                                 <ReactMarkdown className='line-break'>{blog.attributes.blogContent}</ReactMarkdown>
+//                             </div>
+//                         </div>
+//                     </div>
+
+//                     <div className='items-center w-full bg-white rounded-xl drop-shadow-md py-5 max-h-[250px]'>
+//                         {blog.attributes?.authorImg?.data?.attributes?.url && (
+//                             <div>
+//                                 <img
+//                                     className='p-2 w-32 h-32 rounded-full mx-auto object-cover'
+//                                     src={`http://localhost:1337${blog.attributes.authorImg.data.attributes.url}`}
+//                                     alt={blog.attributes?.authorName}
+//                                 />
+//                                 <h1 className='font-bold text-2xl text-center text-gray-900 pt-3'>{blog.attributes?.authorName}</h1>
+//                                 <p className='text-center text-gray-900 font-medium'>{blog.attributes?.authorDesc}</p>
+//                             </div>
+//                         )}
+//                     </div>
+//                 </div>
+//             </div>
+//         </div>
+//     );
+// };
+
+// export default BlogContent;
 
 
 

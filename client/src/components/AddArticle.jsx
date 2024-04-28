@@ -26,7 +26,6 @@ const AddArticle = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Check if required fields are filled out
     if (!formData.blogTitle || !formData.blogContent || !formData.coverImage || !formData.authorImg) {
       setError('Please fill out all required fields');
       return;

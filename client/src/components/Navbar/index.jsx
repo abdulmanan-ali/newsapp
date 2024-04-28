@@ -1,10 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
-
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
+
+  const menuRef = useRef();
+  const languageRef = useRef();
+
+  useEffect(() => {
+    const closeMenu = (event) => {
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(event.target) &&
+        !languageRef.current.contains(event.target)
+      ) {
+        setIsMenuOpen(false);
+        setIsLanguageOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", closeMenu);
+
+    return () => {
+      document.removeEventListener("mousedown", closeMenu);
+    };
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -40,15 +61,35 @@ const Navbar = () => {
           </div>
           <div className="hidden lg:flex space-x-4 items-center">
             <div className="flex space-x-4">
-              <Link to="/" className="hover:underline">Home</Link>
-              <Link to="/sports" className="hover:underline">Sports</Link>
-              <a href="/earth" className="hover:underline">Earth</a>
-              <a href="/worklife" className="hover:underline">Worklife</a>
-              <a href="/travel" className="hover:underline">Travel</a>
-              <a href="/culture" className="hover:underline">Culture</a>
-              <Link to="/addarticle" className="hover:underline">Add Article</Link>
+              <Link to="/" className="hover:underline">
+                Home
+              </Link>
+              <Link to="/news" className="hover:underline">
+                News
+              </Link>
+              <Link to="/sports" className="hover:underline">
+                Sports
+              </Link>
+              <Link to="/business" className="hover:underline">
+                Business
+              </Link>
+              <Link to="/innovation" className="hover:underline">
+                Innovation
+              </Link>
+              <Link to="/culture" className="hover:underline">
+                Culture
+              </Link>
+              <Link to="/travel" className="hover:underline">
+                Travel
+              </Link>
+              <Link to="/earth" className="hover:underline">
+                Earth
+              </Link>
+              <Link to="/addarticle" className="hover:underline">
+                Add Article
+              </Link>
             </div>
-            <div className="relative inline-block text-left">
+            <div className="relative inline-block text-left" ref={languageRef}>
               <button
                 type="button"
                 onClick={() => setIsLanguageOpen(!isLanguageOpen)}
@@ -70,7 +111,7 @@ const Navbar = () => {
                 </svg>
               </button>
               {isLanguageOpen && (
-                <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5" ref={menuRef}>
                   <div
                     className="py-1"
                     role="menu"
@@ -117,35 +158,47 @@ const Navbar = () => {
                   Home
                 </Link>
                 <Link
+                  to="/news"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                >
+                  News
+                </Link>
+                <Link
                   to="/sports"
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                 >
                   Sports
                 </Link>
-                <a
-                  href="/earth"
+                <Link
+                  to="/business"
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                 >
-                  Earth
-                </a>
-                <a
-                  href="/worklife"
+                  Business
+                </Link>
+                <Link
+                  to="/innovation"
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                 >
-                  Worklife
-                </a>
-                <a
-                  href="/travel"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-                >
-                  Travel
-                </a>
-                <a
-                  href="/culture"
+                  Innovation
+                </Link>
+                <Link
+                  to="/culture"
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                 >
                   Culture
-                </a>
+                </Link>
+                <Link
+                  to="/travel"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                >
+                  Travel
+                </Link>
+                <Link
+                  to="/earth"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                >
+                  Earth
+                </Link>
                 <Link
                   to="/addarticle"
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
@@ -215,6 +268,8 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
 
 
 

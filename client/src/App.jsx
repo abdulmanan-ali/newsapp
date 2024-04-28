@@ -9,28 +9,33 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer"
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Sports from "./components/Sports";
 import Earth from "./components/Earth";
 import { Blogs } from "./components";
+import News from "./components/News";
+import Innovation from "./components/Innovation";
 
 
 function App() {
+
+
+  let { loading, blogData, error } = useFetch('http://localhost:1337/api/blogs?populate=*');
+  if (loading) return <p>Loading...</p>
+  if (error) return <p>Error!</p>
+
   // const [categories, setCategories] = useState([]); // State for categories
   // const [blogs, setBlogs] = useState(null); // Placeholder for blogs
 
   // useEffect(() => {
   //   const fetchCategories = async () => { // Fetch categories on mount
   //     const response = await axios.get('http://localhost:1337/api/categories');
-  //     setCategories(response.data);
+  //     setCategories(response.blogdata);
   //   };
 
   //   fetchCategories();
   // }, []);
 
-  let { loading, blogData, error } = useFetch('http://localhost:1337/api/blogs?populate=*');
-  if (loading) return <p>Loading...</p>
-  if (error) return <p>Error!</p>
 
 
   const user = localStorage.getItem("token");
@@ -42,8 +47,10 @@ function App() {
         <ToastContainer />
         <Routes>
           {user && <Route path="/" exact element={<Blogs />} />}
-          {user && <Route path="/Sports" exact element={<Sports />} />}
-          {user && <Route path="/Earth" exact element={<Earth />} />}
+          {user && <Route path="/sports" exact element={<Sports />} />}
+          {user && <Route path="/earth" exact element={<Earth />} />}
+          {user && <Route path="/news" exact element={<News />} />}
+          {user && <Route path="/innovation" exact element={<Innovation />} />}
           {/* {user && <Route path="/Earth" exact element={<Homepage blogs={data ? data : ""} />} />} */}
           <Route path="/signup" exact element={<Signup />} />
           <Route path="/login" exact element={<Login />} />
@@ -62,6 +69,7 @@ function App() {
 }
 
 export default App;
+
 
 
 
