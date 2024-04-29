@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
 import ReactMarkdown from 'react-markdown';
 
 const BlogContent = ({ blogs }) => {
@@ -14,12 +15,26 @@ const BlogContent = ({ blogs }) => {
   // State for comment form
   const [commentFormData, setCommentFormData] = useState({
     name: '',
-    image: null,
+    image: '',
     comment: '',
   });
 
   // State for storing comments
   const [comments, setComments] = useState([]);
+
+  // Fetch comments from the backend when the component mounts
+  useEffect(() => {
+    const fetchComments = async () => {
+      try {
+        const response = await axios.get(`http://localhost:1337/api/comments?filters[blog][id][$eq]=${id}`);
+        setComments(response.data.data);
+      } catch (error) {
+        console.error('Error fetching comments:', error);
+      }
+    };
+
+    fetchComments();
+  }, [id]);
 
   // Handle change in comment form
   const handleCommentChange = (event) => {
@@ -30,177 +45,137 @@ const BlogContent = ({ blogs }) => {
   // Handle submit of comment form
   const handleCommentSubmit = async (event) => {
     event.preventDefault();
-
     try {
       const formDataToSend = new FormData();
       formDataToSend.append('data', JSON.stringify({
         Name: commentFormData.name,
         Comment: [
           {
-            "type": "paragraph",
-            "children": [
-              {
-                "text": commentFormData.comment,
-                "type": "text"
-              }
-            ]
-          }
+            type: 'paragraph',
+            children: [{ text: commentFormData.comment, type: 'text' }],
+          },
         ],
-        blog: id // Include the blog ID here
+        blog: id,
       }));
       if (commentFormData.image) {
-        formDataToSend.append('files.Image', commentFormData.image);
+        formDataToSend.append('files.image', commentFormData.image);
       }
 
-      const response = await fetch('http://localhost:1337/comments', {
-        method: 'POST',
-        body: formDataToSend
+      await axios.post('http://localhost:1337/api/comments', formDataToSend, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
       });
-
-      if (!response.ok) {
-        throw new Error('Error submitting comment:', response.statusText);
-      }
-
-      const newComment = await response.json();
-      setComments([...comments, newComment]); // Update comments state
       // Clear the form after submission
       setCommentFormData({
         name: '',
-        image: null,
+        image: '',
         comment: '',
       });
+      // Fetch updated comments
+      const response = await axios.get(`http://localhost:1337/api/comments?filters[blog][id][$eq]=${id}`);
+      setComments(response.data.data);
     } catch (error) {
-      console.error(error);
+      console.error('Error submitting comment:', error);
     }
   };
 
-  // Fetch comments on blog post load
-  useEffect(() => {
-    const fetchComments = async () => {
-      try {
-        const response = await fetch(`http://localhost:1337/comments?filters[blog][id][$eq]=${id}`);
-        if (!response.ok) {
-          throw new Error('Error fetching comments:', response.statusText);
-        }
-        const commentsData = await response.json();
-        setComments(commentsData.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchComments();
-  }, [id]);
-
   return (
-    <div className='w-full pb-10 bg-[#f9f9f9]'>
+    <div className='w-full pb-10 bg-[#f9f9f9] flex justify-center items-center'>
       <div className='max-w-[1240px] mx-auto'>
-        <div className='grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-1 ss:grid-cols-1 md:gap-x-8 sm:gap-y-8 ss:gap-y-8 px-4 sm:pt-20 md:mt-0 ss:pt-20 text-black'>
-          <div className='col-span-2'>
-            <img
-              className='h-100 w-full object-cover'
-              src={`http://localhost:1337${blog.attributes?.coverImage.data.attributes.url}`}
-              alt={blog.attributes?.blogTitle}
-            />
-            <h1 className='font-bold text-3xl my-1 pt-5'>{blog.attributes?.blogTitle}</h1>
-            <div className="pros">
-              <div className='pt-6'>
-                {/* Wrap blogContent in a custom CSS class if needed */}
-                <ReactMarkdown className="my-markdown">{blog.attributes?.blogContent}</ReactMarkdown>
+        <div className='flex justify-center'>
+          <div className='grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-1 ss:grid-cols-1 md:gap-x-8 sm:gap-y-8 ss:gap-y-8 px-4 sm:pt-20 md:pt-5 ss:pt-20 text-black'>
+            <div className='col-span-2'>
+              <h1 className='font-bold text-3xl my-1 pt-5 text-left leading-normal'>{blog.attributes?.blogTitle}</h1>
+              {blog.attributes?.authorImg?.data?.attributes?.url && (
+                <div className='flex items-center justify-left gap-3'>
+                  <img
+                    className='w-10 h-10 rounded-full object-cover'
+                    src={`http://localhost:1337${blog.attributes.authorImg.data.attributes.url}`}
+                    alt={blog.attributes?.authorName}
+                  />
+                  <p className='text-gray-900 font-small'>{blog.attributes?.authorName}</p>
+                </div>
+              )}
+              <img
+                className='h-auto w-full object-cover mt-5 mb-10 mx-auto'
+                src={`http://localhost:1337${blog.attributes?.coverImage.data.attributes.url}`}
+                alt={blog.attributes?.blogTitle}
+              />
+              <div className="pros text-left max-w-[800px] mx-auto text-base/7">
+                <ReactMarkdown className="leading-loose">{blog.attributes?.blogContent}</ReactMarkdown>
               </div>
-            </div>
 
-            {/* Comment Section */}
-            <div className="mt-8 border-t pt-8">
-              <h2 className="text-xl font-semibold mb-4">Leave a Comment</h2>
-              <form onSubmit={handleCommentSubmit}>
-                <div className="mb-4">
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={commentFormData.name}
-                    onChange={handleCommentChange}
-                    className="mt-1 p-2 w-full border border-gray-300 rounded-md"
-                    required
-                  />
-                </div>
-                <div className="mb-4">
-                  <label htmlFor="image" className="block text-sm font-medium text-gray-700">Choose Image</label>
-                  <input
-                    type="file"
-                    id="image"
-                    name="image"
-                    accept="image/*"
-                    onChange={handleCommentChange}
-                    className="mt-1 p-2 w-full border border-gray-300 rounded-md"
-                  />
-                </div>
-                <div className="mb-4">
-                  <label htmlFor="comment" className="block text-sm font-medium text-gray-700">Comment</label>
-                  <textarea
-                    id="comment"
-                    name="comment"
-                    value={commentFormData.comment}
-                    onChange={handleCommentChange}
-                    className="mt-1 p-2 w-full border border-gray-300 rounded-md"
-                    rows="4"
-                    required
-                  ></textarea>
-                </div>
-                <div className="text-center">
-                  <button
-                    type="submit"
-                    className="bg-indigo-500 text-white py-2 px-4 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600"
-                  >
-                    Submit
-                  </button>
-                </div>
-              </form>
-            </div>
-
-            {/* Display Comments */}
-            {comments.length > 0 && (
+              {/* Comment Section */}
               <div className="mt-8 border-t pt-8">
-                <h2 className="text-xl font-semibold mb-4">Comments</h2>
-                {comments.map((comment, index) => (
-                  <div key={index} className="flex items-start space-x-4 mb-4">
-                    {comment.Image && (
+                <h2 className="text-xl font-semibold mb-4 text-center">Leave a Comment</h2>
+                <form onSubmit={handleCommentSubmit}>
+                  <div className="mb-4">
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={commentFormData.name}
+                      onChange={handleCommentChange}
+                      className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+                      required
+                    />
+                  </div>
+                  {/* <div className="mb-4">
+                    <label htmlFor="image" className="block text-sm font-medium text-gray-700">Choose Image</label>
+                    <input
+                      type="file"
+                      id="image"
+                      name="image"
+                      accept="image/*"
+                      onChange={handleCommentChange}
+                      className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+                    />
+                  </div> */}
+                  <div className="mb-4">
+                    <label htmlFor="comment" className="block text-sm font-medium text-gray-700">Comment</label>
+                    <textarea
+                      id="comment"
+                      name="comment"
+                      value={commentFormData.comment}
+                      onChange={handleCommentChange}
+                      className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+                      rows="4"
+                      required
+                    ></textarea>
+                  </div>
+                  <div className="text-center">
+                    <button
+                      type="submit"
+                      className="bg-indigo-500 text-white py-2 px-4 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600"
+                    >
+                      Submit
+                    </button>
+                  </div>
+                </form>
+              </div>
+
+              {/* Display Comments */}
+              <div className="mt-8 border-t pt-8">
+                <h2 className="text-xl font-semibold mb-4 text-center">Comments</h2>
+                {comments.map((comment) => (
+                  <div key={comment.id} className="flex items-start space-x-4 mb-4">
+                    {comment.attributes.image && (
                       <img
-                        src={`http://localhost:1337${comment.Image[0]?.url}`}
+                        src={`http://localhost:1337${comment.attributes.image[0].url}`}
                         alt="Commenter"
                         className="w-12 h-12 rounded-full object-cover"
                       />
                     )}
                     <div>
-                      <p className="font-semibold">{comment.Name}</p>
-                      <p>{comment.Comment[0]?.children[0]?.text}</p>
+                      <p className="font-semibold">{comment.attributes.Name}</p>
+                      <p>{comment.attributes.Comment[0].children[0].text}</p>
                     </div>
                   </div>
                 ))}
               </div>
-            )}
-
-            {/* Empty State Handling */}
-            {comments.length === 0 && (
-              <div className="mt-8">
-                <p>No comments yet. Be the first to leave one!</p>
-              </div>
-            )}
-          </div>
-
-          <div className='items-center w-full bg-white rounded-xl drop-shadow-md py-5 max-h-[220px]'>
-            {blog.attributes?.authorImg?.data?.attributes?.url && (
-              <div>
-                <img
-                  className='p-2 w-32 h-32 rounded-full mx-auto object-cover'
-                  src={`http://localhost:1337${blog.attributes.authorImg.data.attributes.url}`}
-                  alt={blog.attributes?.authorName}
-                />
-                <h1 className='font-bold text-1xl text-center text-gray-900 pt-3'>{blog.attributes?.authorName}</h1>
-                <p className='text-center text-gray-900 font-medium'>{blog.attributes?.authorDesc}</p>
-              </div>
-            )}
+            </div>
           </div>
         </div>
       </div>
@@ -209,6 +184,49 @@ const BlogContent = ({ blogs }) => {
 };
 
 export default BlogContent;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

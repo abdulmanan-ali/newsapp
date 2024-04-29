@@ -2,18 +2,20 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import useFetch from '../hooks/useFetch';
 
-
-
 const Blog = () => {
-
     let { loading, blogData, error } = useFetch('http://localhost:1337/api/blogs?populate=*');
-    if (loading) return <p>Loading...</p>
-    if (error) return <p>Error!</p>
-
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error!</p>;
 
     return (
         <div className="flex flex-col min-h-screen">
             <main className="flex-grow px-4 py-8">
+                <div className="max-w-[1240px] mx-auto mb-8">
+                    <h1 className="text-4xl font-bold text-left mb-4">NEWS</h1>
+                    <div className="flex items-center">
+                        <hr className="border-b-2 border-black flex-grow" />
+                    </div>
+                </div>
 
                 <div className='w-full bg-[#f9f9f9] py-[50px]'>
                     <div className='max-w-[1240px] mx-auto'>
@@ -29,24 +31,12 @@ const Blog = () => {
                                                 alt={blog.attributes.blogTitle}
                                             />
                                             <div className='p-8'>
-                                                <h3 className='font-bold text-2xl my-1'>{blog.attributes.blogTitle}</h3>
-                                                {/* <p className='text-gray-600 text-xl'>{blog.attributes.blogDesc}</p> */}
+                                                <h3 className='font-bold text-2xl my-1 hover:underline'>{blog.attributes.blogTitle}</h3>
+                                                <p className='text-gray-600 text-sm'>{new Date(blog.attributes.publishedAt).toLocaleDateString()} | {blog.attributes.category.data.attributes.Name}</p>
                                             </div>
                                         </div>
                                     </Link>
                                 ))
-                            )}
-
-                            {/* Show Easter egg message if data is undefined (loading) */}
-                            {!blogData?.data && (
-                                <div className="text-center">
-                                    {blogData?.data === undefined && (
-                                        <p>
-                                            Blogs are loading... In the meantime, here's a secret message: Shhh! This is an Easter egg!
-                                        </p>
-                                    )}
-                                    {blogData?.data?.length === 0 && <p>No blogs found.</p>}
-                                </div>
                             )}
                         </div>
                     </div>
@@ -57,6 +47,10 @@ const Blog = () => {
 };
 
 export default Blog;
+
+
+
+
 
 
 // import React from 'react';

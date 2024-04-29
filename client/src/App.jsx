@@ -54,8 +54,9 @@ function App() {
           {/* {user && <Route path="/Earth" exact element={<Homepage blogs={data ? data : ""} />} />} */}
           <Route path="/signup" exact element={<Signup />} />
           <Route path="/login" exact element={<Login />} />
-          <Route path="/addarticle" exact element={<AddArticle />} />
+          {user && <Route path="/addarticle" exact element={<AddArticle />} />}
           <Route path="/" element={<Navigate replace to="/login" />} />
+          <Route path="/addarticle" element={<Navigate replace to="/login" />} />
           <Route path="/Sports" element={<Navigate replace to="/login" />} />
           <Route path="/Earth" element={<Navigate replace to="/login" />} />
           {/* <Route path='/' element={<Homepage blogs={data ? data : ""} />}></Route> */}
