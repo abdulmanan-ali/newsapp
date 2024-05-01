@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import useFetch from '../hooks/useFetch';
 
 const Culture = () => {
-    let { loading, blogData, error } = useFetch('http://localhost:1337/api/blogs?populate=*&filters[category][Name][$eq]=Sports');
+    let { loading, blogData, error } = useFetch('http://localhost:1337/api/blogs?populate=*&filters[category][Name][$eq]=Culture');
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error!</p>;
 
@@ -11,7 +11,7 @@ const Culture = () => {
         <div className="flex flex-col min-h-screen">
             <main className="flex-grow px-4 py-8">
                 <div className="max-w-[1240px] mx-auto mb-8">
-                    <h1 className="text-4xl font-bold text-left mb-4">SPORTS</h1>
+                    <h1 className="text-4xl font-bold text-left mb-4">CULTURE</h1>
                     <div className="flex items-center">
                         <hr className="border-b-2 border-black flex-grow" />
                     </div>

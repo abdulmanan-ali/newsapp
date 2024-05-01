@@ -2,24 +2,21 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import useFetch from '../hooks/useFetch';
 
-
-
-const Innovation = () => {
-
-    let { loading, blogData, error } = useFetch('http://localhost:1337/api/blogs?populate=*&filters[categories][Name][$eq]=Innovation');
-    if (loading) return <p>Loading...</p>
-    if (error) return <p>Error!</p>
-
+const Culture = () => {
+    let { loading, blogData, error } = useFetch('http://localhost:1337/api/blogs?populate=*&filters[category][Name][$eq]=Innovation');
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error!</p>;
 
     return (
         <div className="flex flex-col min-h-screen">
             <main className="flex-grow px-4 py-8">
                 <div className="max-w-[1240px] mx-auto mb-8">
-                    <h1 className="text-4xl font-bold text-left mb-4">News</h1>
+                    <h1 className="text-4xl font-bold text-left mb-4">INNOVATION</h1>
                     <div className="flex items-center">
                         <hr className="border-b-2 border-black flex-grow" />
                     </div>
                 </div>
+
                 <div className='w-full bg-[#f9f9f9] py-[50px]'>
                     <div className='max-w-[1240px] mx-auto'>
                         <div className='grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 ss:grid-cols-1 gap-8 px-4 text-black'>
@@ -34,24 +31,12 @@ const Innovation = () => {
                                                 alt={blog.attributes.blogTitle}
                                             />
                                             <div className='p-8'>
-                                                <h3 className='font-bold text-2xl my-1'>{blog.attributes.blogTitle}</h3>
-                                                {/* <p className='text-gray-600 text-xl'>{blog.attributes.blogDesc}</p> */}
+                                                <h3 className='font-bold text-2xl my-1 hover:underline'>{blog.attributes.blogTitle}</h3>
+                                                <p className='text-gray-600 text-medium'>{new Date(blog.attributes.publishedAt).toLocaleDateString()} | {blog.attributes.category.data.attributes.Name}</p>
                                             </div>
                                         </div>
                                     </Link>
                                 ))
-                            )}
-
-                            {/* Show Easter egg message if data is undefined (loading) */}
-                            {!blogData?.data && (
-                                <div className="text-center">
-                                    {blogData?.data === undefined && (
-                                        <p>
-                                            Blogs are loading... In the meantime, here's a secret message: Shhh! This is an Easter egg!
-                                        </p>
-                                    )}
-                                    {blogData?.data?.length === 0 && <p>No blogs found.</p>}
-                                </div>
                             )}
                         </div>
                     </div>
@@ -61,4 +46,4 @@ const Innovation = () => {
     );
 };
 
-export default Innovation;
+export default Culture;

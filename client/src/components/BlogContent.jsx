@@ -103,7 +103,7 @@ const BlogContent = ({ blogs }) => {
                 alt={blog.attributes?.blogTitle}
               />
               <div className="pros text-left max-w-[800px] mx-auto text-base/7">
-                <ReactMarkdown className="leading-loose">{blog.attributes?.blogContent}</ReactMarkdown>
+                <ReactMarkdown className="line-break">{blog.attributes?.blogContent}</ReactMarkdown>
               </div>
 
               {/* Comment Section */}

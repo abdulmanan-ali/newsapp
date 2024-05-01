@@ -1,5 +1,5 @@
 import { Route, Routes, Navigate } from "react-router-dom";
-import axios from 'axios'
+// import axios from 'axios'
 import Signup from "./components/Signup";
 import Login from "./components/Login";
 import { BlogContentPage } from "./pages";
@@ -15,6 +15,10 @@ import Earth from "./components/Earth";
 import { Blogs } from "./components";
 import News from "./components/News";
 import Innovation from "./components/Innovation";
+import Business from "./components/Business";
+import Culture from "./components/Culture";
+import Travel from "./components/Travel";
+
 
 
 function App() {
@@ -46,19 +50,26 @@ function App() {
       <div className="App">
         <ToastContainer />
         <Routes>
-          {user && <Route path="/" exact element={<Blogs />} />}
+          {/* {user && <Route path="/" exact element={<Blogs />} />}
           {user && <Route path="/sports" exact element={<Sports />} />}
           {user && <Route path="/earth" exact element={<Earth />} />}
           {user && <Route path="/news" exact element={<News />} />}
-          {user && <Route path="/innovation" exact element={<Innovation />} />}
+          {user && <Route path="/innovation" exact element={<Innovation />} />} */}
           {/* {user && <Route path="/Earth" exact element={<Homepage blogs={data ? data : ""} />} />} */}
+          {user && <Route path="/addarticle" exact element={<AddArticle />} />}
           <Route path="/signup" exact element={<Signup />} />
           <Route path="/login" exact element={<Login />} />
-          {user && <Route path="/addarticle" exact element={<AddArticle />} />}
-          <Route path="/" element={<Navigate replace to="/login" />} />
+          <Route path="/logout" exact element={<Login />} />
+          {/* <Route path="/" element={<Navigate replace to="/login" />} /> */}
           <Route path="/addarticle" element={<Navigate replace to="/login" />} />
-          <Route path="/Sports" element={<Navigate replace to="/login" />} />
-          <Route path="/Earth" element={<Navigate replace to="/login" />} />
+          <Route path="/" element={<Blogs />} />
+          <Route path="/Sports" element={<Sports />} />
+          <Route path="/news" element={<News />} />
+          <Route path="/earth" element={<Earth />} />
+          <Route path="/innovation" element={<Innovation />} />
+          <Route path="/culture" element={<Culture />} />
+          <Route path="/travel" element={<Travel />} />
+          <Route path="/business" element={<Business />} />
           {/* <Route path='/' element={<Homepage blogs={data ? data : ""} />}></Route> */}
           <Route path='/news/en/:id' element={<BlogContentPage blogs={blogData ? blogData : ""} />}></Route>
           {/* <Route path="/category/:categoryId" element={<BlogContentPage blogs={data ? data : ""} />} />   */}

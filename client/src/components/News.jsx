@@ -6,7 +6,7 @@ import useFetch from '../hooks/useFetch';
 
 const News = () => {
 
-    let { loading, blogData, error } = useFetch('http://localhost:1337/api/blogs?populate=*&filters[categories][Name][$eq]=News');
+    let { loading, blogData, error } = useFetch('http://localhost:1337/api/blogs?populate=*&filters[category][Name][$eq]=News');
     if (loading) return <p>Loading...</p>
     if (error) return <p>Error!</p>
 
