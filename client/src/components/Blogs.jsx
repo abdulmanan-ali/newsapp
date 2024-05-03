@@ -23,7 +23,7 @@ const Blog = () => {
                             {/* Check if blogs data exists before showing blogs */}
                             {blogData?.data?.length > 0 && (
                                 blogData.data.map((blog) => (
-                                    <Link key={blog.id} to={`/news/en/${blog.id}`}>
+                                    <Link key={blog.id} to={`/news/en/${blog.attributes.slug}`}>
                                         <div className='bg-white rounded-xl overflow-hidden drop-shadow-md'>
                                             <img
                                                 className='h-40 w-full object-cover'

@@ -71,7 +71,7 @@ function App() {
           <Route path="/travel" element={<Travel />} />
           <Route path="/business" element={<Business />} />
           {/* <Route path='/' element={<Homepage blogs={data ? data : ""} />}></Route> */}
-          <Route path='/news/en/:id' element={<BlogContentPage blogs={blogData ? blogData : ""} />}></Route>
+          <Route path='/news/en/:slug' element={<BlogContentPage blogs={blogData ? blogData : ""} />}></Route>
           {/* <Route path="/category/:categoryId" element={<BlogContentPage blogs={data ? data : ""} />} />   */}
         </Routes>
       </div>
