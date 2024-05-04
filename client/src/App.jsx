@@ -63,7 +63,8 @@ function App() {
           {/* <Route path="/" element={<Navigate replace to="/login" />} /> */}
           <Route path="/addarticle" element={<Navigate replace to="/login" />} />
           <Route path="/" element={<Blogs />} />
-          <Route path="/Sports" element={<Sports />} />
+          <Route path="/en" element={<Blogs />} />
+          <Route path="/sports" element={<Sports />} />
           <Route path="/news" element={<News />} />
           <Route path="/earth" element={<Earth />} />
           <Route path="/innovation" element={<Innovation />} />
@@ -71,7 +72,7 @@ function App() {
           <Route path="/travel" element={<Travel />} />
           <Route path="/business" element={<Business />} />
           {/* <Route path='/' element={<Homepage blogs={data ? data : ""} />}></Route> */}
-          <Route path='/news/en/:slug' element={<BlogContentPage blogs={blogData ? blogData : ""} />}></Route>
+          <Route path='/:locale/:category/:slug' element={<BlogContentPage blogs={blogData ? blogData : ""} />}></Route>
           {/* <Route path="/category/:categoryId" element={<BlogContentPage blogs={data ? data : ""} />} />   */}
         </Routes>
       </div>

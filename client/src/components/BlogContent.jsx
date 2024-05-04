@@ -26,7 +26,7 @@ const BlogContent = ({ blogs }) => {
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const response = await axios.get(`http://localhost:1337/api/blogs?populate=*&filters[slug][$eq]=${slug}`);
+        const response = await axios.get(`http://localhost:1337/api/comments?filters[blog][slug][$eq]=${slug}`);
         setComments(response.data.data);
       } catch (error) {
         console.error('Error fetching comments:', error);
@@ -55,7 +55,7 @@ const BlogContent = ({ blogs }) => {
             children: [{ text: commentFormData.comment, type: 'text' }],
           },
         ],
-        blog: id,
+        blog: blog.id,
       }));
       if (commentFormData.image) {
         formDataToSend.append('files.image', commentFormData.image);
@@ -73,7 +73,7 @@ const BlogContent = ({ blogs }) => {
         comment: '',
       });
       // Fetch updated comments
-      const response = await axios.get(`http://localhost:1337/api/blogs?populate=*&filters[slug][$eq]=${slug}`);
+      const response = await axios.get(`http://localhost:1337/api/comments?filters[blog][slug][$eq]=${slug}`);
       setComments(response.data.data);
     } catch (error) {
       console.error('Error submitting comment:', error);
@@ -81,12 +81,12 @@ const BlogContent = ({ blogs }) => {
   };
 
   return (
-    <div className='w-full pb-10 bg-[#f9f9f9] flex justify-center items-center'>
+    <div className='w-full pb-10 bg-[#f9f9f9] flex justify-center items-center pt-1'>
       <div className='max-w-[1240px] mx-auto'>
         <div className='flex justify-center'>
-          <div className='grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-1 ss:grid-cols-1 md:gap-x-8 sm:gap-y-8 ss:gap-y-8 px-4 sm:pt-20 md:pt-5 ss:pt-20 text-black'>
+          <div className='grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-1 ss:grid-cols-1 md:gap-x-8 sm:gap-y-8 ss:gap-y-8 px-4 sm:pt-5 md:pt-5 ss:pt-5 text-black'>
             <div className='col-span-2'>
-              <h1 className='font-bold text-3xl my-1 pt-5 text-left leading-normal'>{blog.attributes?.blogTitle}</h1>
+              <h1 className='font-bold text-4xl my-1 pt-0 text-left leading-normal'>{blog.attributes?.blogTitle}</h1>
               {blog.attributes?.authorImg?.data?.attributes?.url && (
                 <div className='flex items-center justify-left gap-3'>
                   <img
@@ -102,8 +102,10 @@ const BlogContent = ({ blogs }) => {
                 src={`http://localhost:1337${blog.attributes?.coverImage.data.attributes.url}`}
                 alt={blog.attributes?.blogTitle}
               />
-              <div className="pros text-left max-w-[800px] mx-auto text-base/7">
-                <ReactMarkdown className="line-break">{blog.attributes?.blogContent}</ReactMarkdown>
+              <div className="pros text-left max-w-[800px] mx-auto text-base" style={{ lineHeight: '1.7' }}>
+                <ReactMarkdown className="line-break" components={{ p: ({ children }) => <p className="mb-4">{children}</p> }}>
+                  {blog.attributes?.blogContent}
+                </ReactMarkdown>
               </div>
 
               {/* Comment Section */}
@@ -122,17 +124,6 @@ const BlogContent = ({ blogs }) => {
                       required
                     />
                   </div>
-                  {/* <div className="mb-4">
-                    <label htmlFor="image" className="block text-sm font-medium text-gray-700">Choose Image</label>
-                    <input
-                      type="file"
-                      id="image"
-                      name="image"
-                      accept="image/*"
-                      onChange={handleCommentChange}
-                      className="mt-1 p-2 w-full border border-gray-300 rounded-md"
-                    />
-                  </div> */}
                   <div className="mb-4">
                     <label htmlFor="comment" className="block text-sm font-medium text-gray-700">Comment</label>
                     <textarea
@@ -161,20 +152,21 @@ const BlogContent = ({ blogs }) => {
                 <h2 className="text-xl font-semibold mb-4 text-center">Comments</h2>
                 {comments.map((comment) => (
                   <div key={comment.id} className="flex items-start space-x-4 mb-4">
-                    {comment.attributes.image && (
+                    {comment.attributes.image && comment.attributes.image.length > 0 ? (
                       <img
                         src={`http://localhost:1337${comment.attributes.image[0].url}`}
                         alt="Commenter"
                         className="w-12 h-12 rounded-full object-cover"
                       />
-                    )}
-                    {/* <div>
+                    ) : null}
+                    <div>
                       <p className="font-semibold">{comment.attributes.Name}</p>
                       <p>{comment.attributes.Comment[0].children[0].text}</p>
-                    </div> */}
+                    </div>
                   </div>
                 ))}
               </div>
+
             </div>
           </div>
         </div>
@@ -184,6 +176,7 @@ const BlogContent = ({ blogs }) => {
 };
 
 export default BlogContent;
+
 
 
 // import React, { useState, useEffect } from 'react';

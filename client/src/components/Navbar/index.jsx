@@ -123,14 +123,14 @@ const Navbar = () => {
                       aria-labelledby="options-menu"
                     >
                       <Link
-                        to="/news/en"
+                        to="/en"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                         role="menuitem"
                       >
                         English
                       </Link>
                       <Link
-                        to="/news/ur"
+                        to="/ur"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                         role="menuitem"
                       >
@@ -239,14 +239,14 @@ const Navbar = () => {
                           aria-labelledby="options-menu"
                         >
                           <Link
-                            to="/news/en"
+                            to="/en"
                             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                             role="menuitem"
                           >
                             English
                           </Link>
                           <Link
-                            to="/news/ur"
+                            to="/ur"
                             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                             role="menuitem"
                           >

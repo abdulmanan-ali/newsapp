@@ -11,7 +11,7 @@ const Culture = () => {
         <div className="flex flex-col min-h-screen">
             <main className="flex-grow px-4 py-8">
                 <div className="max-w-[1240px] mx-auto mb-8">
-                    <h1 className="text-4xl font-bold text-left mb-4">INNOVATION</h1>
+                    <h1 className="text-4xl font-bold text-left mb-4">Innovation</h1>
                     <div className="flex items-center">
                         <hr className="border-b-2 border-black flex-grow" />
                     </div>
@@ -23,7 +23,7 @@ const Culture = () => {
                             {/* Check if blogs data exists before showing blogs */}
                             {blogData?.data?.length > 0 && (
                                 blogData.data.map((blog) => (
-                                    <Link key={blog.id} to={`/news/en/${blog.attributes.slug}`}>
+                                    <Link key={blog.id} to={`/${blog.attributes.locale}/${blog.attributes.category.data.attributes.Name.toLowerCase()}/${blog.attributes.slug}`}>
                                         <div className='bg-white rounded-xl overflow-hidden drop-shadow-md'>
                                             <img
                                                 className='h-40 w-full object-cover'
@@ -32,7 +32,7 @@ const Culture = () => {
                                             />
                                             <div className='p-8'>
                                                 <h3 className='font-bold text-2xl my-1 hover:underline'>{blog.attributes.blogTitle}</h3>
-                                                <p className='text-gray-600 text-medium'>{new Date(blog.attributes.publishedAt).toLocaleDateString()} | {blog.attributes.category.data.attributes.Name}</p>
+                                                <p className='text-gray-600 text-medium'>{new Date(blog.attributes.updatedAt).toLocaleDateString()} | {blog.attributes.category.data.attributes.Name}</p>
                                             </div>
                                         </div>
                                     </Link>
