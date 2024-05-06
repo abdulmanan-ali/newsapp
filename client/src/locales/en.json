@@ -1,22 +1,26 @@
 {
-    "navbar": {
-      "home": "Home",
-      "news": "News",
-      "sport": "Sport",
-      "earth": "Earth",
-      "worklife": "Worklife",
-      "travel": "Travel",
-      "culture": "Culture",
-      "language": "Language",
-      "english": "English",
-      "urdu": "Urdu",
-      "logout": "Logout"
-    },
-    "blogs": {
-      "loading": "Loading...",
-      "error": "Error!",
-      "easterEgg": "Blogs are loading... In the meantime, here's a secret message: Shhh! This is an Easter egg!",
-      "notFound": "No blogs found."
-    }
+  "navbar": {
+    "home": "Home",
+    "news": "News",
+    "sports": "Sports",
+    "business": "Business",
+    "innovation": "Innovation",
+    "culture": "Culture",
+    "travel": "Travel",
+    "earth": "Earth",
+    "addArticle": "Add Article",
+    "language": "Language",
+    "english": "English",
+    "urdu": "اردو",
+    "logout": "Logout"
+  },
+  "footer": {
+    "aboutUs": "About Us",
+    "contactUs": "Contact Us",
+    "privacyPolicy": "Privacy Policy",
+    "facebook": "Facebook",
+    "twitter": "Twitter",
+    "instagram": "Instagram",
+    "copyright": "© 2024 Multilingual News. All Rights Reserved."
   }
-  
+}

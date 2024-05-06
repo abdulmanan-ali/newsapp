@@ -86,7 +86,7 @@ const BlogContent = ({ blogs }) => {
         <div className='flex justify-center'>
           <div className='grid lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-1 ss:grid-cols-1 md:gap-x-8 sm:gap-y-8 ss:gap-y-8 px-4 sm:pt-5 md:pt-5 ss:pt-5 text-black'>
             <div className='col-span-2'>
-              <h1 className='font-bold text-4xl my-1 pt-0 text-left leading-normal'>{blog.attributes?.blogTitle}</h1>
+              <h1 className='font-bold text-4xl my-1 pt-0 text-left leading-snug'>{blog.attributes?.blogTitle}</h1>
               {blog.attributes?.authorImg?.data?.attributes?.url && (
                 <div className='flex items-center justify-left gap-3'>
                   <img

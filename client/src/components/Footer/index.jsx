@@ -1,26 +1,30 @@
 import React from "react";
+import { useTranslation } from 'react-i18next';
 
 const Footer = () => {
+  const { t } = useTranslation();
+
   return (
     <footer className="bg-[#02044A] text-gray-300 py-8 px-4 ">
       <div className="container mx-auto flex flex-col justify-between items-center">
         <div className="flex flex-row space-x-4">
-          <a href="#" className="text-white hover:text-blue-500">About Us</a>
-          <a href="#" className="text-white hover:text-blue-500">Contact Us</a>
-          <a href="#" className="text-white hover:text-blue-500">Privacy Policy</a>
+          <a href="#" className="text-white hover:text-blue-500">{t('footer.aboutUs')}</a>
+          <a href="#" className="text-white hover:text-blue-500">{t('footer.contactUs')}</a>
+          <a href="#" className="text-white hover:text-blue-500">{t('footer.privacyPolicy')}</a>
         </div>
         <div className="flex flex-row space-x-4 mt-4">
-          <a href="#" className="text-white hover:text-blue-500">Facebook</a>
-          <a href="#" className="text-white hover:text-blue-500">Twitter</a>
-          <a href="#" className="text-white hover:text-blue-500">Instagram</a>
+          <a href="#" className="text-white hover:text-blue-500">{t('footer.facebook')}</a>
+          <a href="#" className="text-white hover:text-blue-500">{t('footer.twitter')}</a>
+          <a href="#" className="text-white hover:text-blue-500">{t('footer.instagram')}</a>
         </div>
-        <p className="text-center mt-4 text-sm">&copy; 2024 Multilingual News. All Rights Reserved.</p>
+        <p className="text-center mt-4 text-sm">{t('footer.copyright')}</p>
       </div>
     </footer>
   );
 };
 
 export default Footer;
+
 
 
 // import React from "react";

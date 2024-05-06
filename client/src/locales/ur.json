@@ -1,22 +1,26 @@
 {
-    "navbar": {
-      "home": "ہوم",
-      "news": "خبریں",
-      "sport": "کھیل",
-      "earth": "زمین",
-      "worklife": "کام کی زندگی",
-      "travel": "سفر",
-      "culture": "ثقافت",
-      "language": "زبان",
-      "english": "انگریزی",
-      "urdu": "اردو",
-      "logout": "لاگ آوٹ"
-    },
-    "blogs": {
-      "loading": "لوڈ ہو رہا ہے...",
-      "error": "خرابی!",
-      "easterEgg": "بلاگز لوڈ ہو رہے ہیں... اس دوران، یہاں ایک خفیہ پیغام ہے: چپ! یہ ایسٹر ایگ ہے!",
-      "notFound": "کوئی بلاگ نہیں ملا."
-    }
+  "navbar": {
+    "home": "ہوم",
+    "news": "خبریں",
+    "sports": "کھیل",
+    "business": "کاروبار",
+    "innovation": "جدت",
+    "culture": "ثقافت",
+    "travel": "سفر",
+    "earth": "زمین",
+    "addArticle": "مضمون شامل کریں",
+    "language": "زبان",
+    "english": "English",
+    "urdu": "اردو",
+    "logout": "لاگ آوٹ"
+  },
+  "footer": {
+    "aboutUs": "ہمارے بارے میں",
+    "contactUs": "ہم سے رابطہ کریں",
+    "privacyPolicy": "رازداری کی پالیسی",
+    "facebook": "فیس بک",
+    "twitter": "ٹوئٹر",
+    "instagram": "انسٹاگرام",
+    "copyright": "© 2024 ملٹی لنگول نیوز۔ تمام حقوق محفوظ ہیں۔"
   }
-  
+}
