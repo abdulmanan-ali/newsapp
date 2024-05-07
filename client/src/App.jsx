@@ -30,15 +30,17 @@ function App() {
   }, [location]);
 
   const { loading, blogData, error } = useFetch(
-    `http://localhost:1337/api/blogs?populate=*&locale=${locale}`
+    `http://localhost:1337/api/blogs?populate=*&locale=${locale}`,
+    locale
   );
+
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error!</p>;
 
   return (
     <>
-      <Navbar />
+      <Navbar locale={locale} />
       <div className="App">
         <Routes>
           <Route path="/signup" element={<Signup />} />
@@ -48,7 +50,7 @@ function App() {
           <Route path="/" element={<Navigate to={`/${locale}`} />} />
           <Route path="/:locale" element={<Blogs locale={locale} blogData={blogData} />} />
           <Route path="/sports" element={<Sports />} />
-          <Route path="/news" element={<News />} />
+          <Route path="/:locale/news" element={<News locale={locale} />} />
           <Route path="/earth" element={<Earth />} />
           <Route path="/innovation" element={<Innovation />} />
           <Route path="/culture" element={<Culture />} />

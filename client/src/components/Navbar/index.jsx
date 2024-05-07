@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 
-const Navbar = () => {
+const Navbar = ({ locale }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
   const navigate = useNavigate();
@@ -72,7 +72,7 @@ const Navbar = () => {
               <Link to="/" className="hover:underline">
                 {t('navbar.home')}
               </Link>
-              <Link to="/news" className="hover:underline">
+              <Link to={`/${locale}/news`} className="hover:underline">
                 {t('navbar.news')}
               </Link>
               <Link to="/sports" className="hover:underline">

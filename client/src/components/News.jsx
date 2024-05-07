@@ -2,20 +2,17 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import useFetch from '../hooks/useFetch';
 
+const News = ({ locale }) => {
+    const { loading, blogData, error } = useFetch(`http://localhost:1337/api/blogs?populate=*&filters[category][Name][$eq]=News&locale=${locale}`, locale);
 
-
-const News = () => {
-
-    let { loading, blogData, error } = useFetch('http://localhost:1337/api/blogs?populate=*&filters[category][Name][$eq]=News');
-    if (loading) return <p>Loading...</p>
-    if (error) return <p>Error!</p>
-
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error!</p>;
 
     return (
         <div className="flex flex-col min-h-screen">
             <main className="flex-grow px-4 py-8">
                 <div className="max-w-[1240px] mx-auto mb-8">
-                    <h1 className="text-4xl font-bold text-left mb-4">NEWS</h1>
+                    <h1 className="text-4xl font-bold text-left mb-4">News</h1>
                     <div className="flex items-center">
                         <hr className="border-b-2 border-black flex-grow" />
                     </div>
@@ -36,7 +33,7 @@ const News = () => {
                                             />
                                             <div className='p-8'>
                                                 <h3 className='font-bold text-2xl my-1 hover:underline'>{blog.attributes.blogTitle}</h3>
-                                                <p className='text-gray-600 text-sm'>{new Date(blog.attributes.updatedAt).toLocaleDateString()} | {blog.attributes.category.data.attributes.Name}</p>
+                                                <p className='text-gray-600 text-medium'>{new Date(blog.attributes.updatedAt).toLocaleDateString()} | {blog.attributes.category.data.attributes.Name}</p>
                                             </div>
                                         </div>
                                     </Link>
