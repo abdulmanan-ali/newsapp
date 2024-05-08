@@ -32,7 +32,7 @@ const Login = () => {
 			// 	});
 			// }
 			localStorage.setItem("token", res.data);
-			  window.location = "/";
+			  window.location = "/en";
 			// navigate("/");
 
 		} catch (error) {

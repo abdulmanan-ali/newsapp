@@ -34,6 +34,7 @@ function App() {
     locale
   );
 
+  const user = localStorage.getItem("token");
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error!</p>;
@@ -45,17 +46,19 @@ function App() {
         <Routes>
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/logout" element={<Login />} />
-          <Route path="/addarticle" element={<AddArticle />} />
+          {user && <Route path="/:locale/addarticle" exact element={<AddArticle locale={locale}/>} />}
+          <Route path="/addarticle" element={<Navigate to={`/login`} />} />
           <Route path="/" element={<Navigate to={`/${locale}`} />} />
           <Route path="/:locale" element={<Blogs locale={locale} blogData={blogData} />} />
-          <Route path="/sports" element={<Sports />} />
+          <Route path="/:locale/sports" element={<Sports locale={locale} />} />
           <Route path="/:locale/news" element={<News locale={locale} />} />
-          <Route path="/earth" element={<Earth />} />
-          <Route path="/innovation" element={<Innovation />} />
-          <Route path="/culture" element={<Culture />} />
-          <Route path="/travel" element={<Travel />} />
-          <Route path="/business" element={<Business />} />
+          <Route path="/:locale/earth" element={<Earth locale={locale} />} />
+          <Route path="/:locale/innovation" element={<Innovation locale={locale} />} />
+          <Route path="/:locale/culture" element={<Culture locale={locale} />} />
+          <Route path="/:locale/travel" element={<Travel locale={locale} />} />
+          <Route path="/:locale/business" element={<Business locale={locale} />} />
           <Route path='/:locale/:category/:slug' element={<BlogContentPage blogs={blogData ? blogData : ""} />}></Route>
         </Routes>
       </div>

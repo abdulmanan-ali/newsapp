@@ -2,9 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import useFetch from '../hooks/useFetch';
 
-const Culture = () => {
-    let { loading, blogData, error } = useFetch('http://localhost:1337/api/blogs?populate=*&filters[category][Name][$eq]=Sports');
-    if (loading) return <p>Loading...</p>;
+const Culture = ({ locale }) => {
+    let { loading, blogData, error } = useFetch(`http://localhost:1337/api/blogs?populate=*&filters[category][Name][$eq]=Sports&locale=${locale}`, locale);
     if (error) return <p>Error!</p>;
 
     return (

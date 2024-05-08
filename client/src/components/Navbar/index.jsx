@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 
 const Navbar = ({ locale }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
-  const navigate = useNavigate();
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
 
   const menuRef = useRef();
   const languageRef = useRef();
@@ -38,6 +37,12 @@ const Navbar = ({ locale }) => {
 
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
+    setIsLanguageOpen(false);
+    if (lng === 'en') {
+      navigate('/en');
+    } else if (lng === 'ur') {
+      navigate('/ur');
+    }
   };
 
   return (
@@ -75,25 +80,25 @@ const Navbar = ({ locale }) => {
               <Link to={`/${locale}/news`} className="hover:underline">
                 {t('navbar.news')}
               </Link>
-              <Link to="/sports" className="hover:underline">
+              <Link to={`/${locale}/sports`} className="hover:underline">
                 {t('navbar.sports')}
               </Link>
-              <Link to="/business" className="hover:underline">
+              <Link to={`/${locale}/business`} className="hover:underline">
                 {t('navbar.business')}
               </Link>
-              <Link to="/innovation" className="hover:underline">
+              <Link to={`/${locale}/innovation`} className="hover:underline">
                 {t('navbar.innovation')}
               </Link>
-              <Link to="/culture" className="hover:underline">
+              <Link to={`/${locale}/culture`} className="hover:underline">
                 {t('navbar.culture')}
               </Link>
-              <Link to="/travel" className="hover:underline">
+              <Link to={`/${locale}/travel`} className="hover:underline">
                 {t('navbar.travel')}
               </Link>
-              <Link to="/earth" className="hover:underline">
+              <Link to={`/${locale}/earth`} className="hover:underline">
                 {t('navbar.earth')}
               </Link>
-              <Link to="/addarticle" className="hover:underline">
+              <Link to={`/${locale}/addarticle`} className="hover:underline">
                 {t('navbar.addArticle')}
               </Link>
             </div>
@@ -128,14 +133,14 @@ const Navbar = ({ locale }) => {
                   >
                     <button
                       onClick={() => changeLanguage('en')}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                       role="menuitem"
                     >
                       {t('navbar.english')}
                     </button>
                     <button
                       onClick={() => changeLanguage('ur')}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                       role="menuitem"
                     >
                       {t('navbar.urdu')}
@@ -144,6 +149,7 @@ const Navbar = ({ locale }) => {
                 </div>
               )}
             </div>
+
           </div>
           {/* End of dropdown */}
           <div className="hidden lg:flex">
@@ -166,49 +172,49 @@ const Navbar = ({ locale }) => {
                   {t('navbar.home')}
                 </Link>
                 <Link
-                  to="/news"
+                  to={`/${locale}/news`}
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                 >
                   {t('navbar.news')}
                 </Link>
                 <Link
-                  to="/sports"
+                  to={`/${locale}/sports`}
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                 >
                   {t('navbar.sports')}
                 </Link>
                 <Link
-                  to="/business"
+                  to={`/${locale}/business`}
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                 >
                   {t('navbar.business')}
                 </Link>
                 <Link
-                  to="/innovation"
+                  to={`/${locale}/innovation`}
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                 >
                   {t('navbar.innovation')}
                 </Link>
                 <Link
-                  to="/culture"
+                  to={`/${locale}/culture`}
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                 >
                   {t('navbar.culture')}
                 </Link>
                 <Link
-                  to="/travel"
+                  to={`/${locale}/travel`}
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                 >
                   {t('navbar.travel')}
                 </Link>
                 <Link
-                  to="/earth"
+                  to={`/${locale}/earth`}
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                 >
                   {t('navbar.earth')}
                 </Link>
                 <Link
-                  to="/addarticle"
+                  to={`/${locale}/addarticle`}
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                 >
                   {t('navbar.addArticle')}
@@ -231,14 +237,12 @@ const Navbar = ({ locale }) => {
 export default Navbar;
 
 
-
-
 // import React, { useState, useEffect, useRef } from "react";
 // import { Link } from "react-router-dom";
 // import { useNavigate } from "react-router-dom";
 // import { useTranslation } from 'react-i18next';
 
-// const Navbar = () => {
+// const Navbar = ({ locale }) => {
 //   const [isMenuOpen, setIsMenuOpen] = useState(false);
 //   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
 //   const navigate = useNavigate();
@@ -307,28 +311,28 @@ export default Navbar;
 //               <Link to="/" className="hover:underline">
 //                 {t('navbar.home')}
 //               </Link>
-//               <Link to="/news" className="hover:underline">
+//               <Link to={`/${locale}/news`} className="hover:underline">
 //                 {t('navbar.news')}
 //               </Link>
-//               <Link to="/sports" className="hover:underline">
+//               <Link to={`/${locale}/sports`} className="hover:underline">
 //                 {t('navbar.sports')}
 //               </Link>
-//               <Link to="/business" className="hover:underline">
+//               <Link to={`/${locale}/business`} className="hover:underline">
 //                 {t('navbar.business')}
 //               </Link>
-//               <Link to="/innovation" className="hover:underline">
+//               <Link to={`/${locale}/innovation`} className="hover:underline">
 //                 {t('navbar.innovation')}
 //               </Link>
-//               <Link to="/culture" className="hover:underline">
+//               <Link to={`/${locale}/culture`}className="hover:underline">
 //                 {t('navbar.culture')}
 //               </Link>
-//               <Link to="/travel" className="hover:underline">
+//               <Link to={`/${locale}/travel`} className="hover:underline">
 //                 {t('navbar.travel')}
 //               </Link>
-//               <Link to="/earth" className="hover:underline">
+//               <Link to={`/${locale}/earth`} className="hover:underline">
 //                 {t('navbar.earth')}
 //               </Link>
-//               <Link to="/addarticle" className="hover:underline">
+//               <Link to={`/${locale}/addarticle`}className="hover:underline">
 //                 {t('navbar.addArticle')}
 //               </Link>
 //             </div>
@@ -392,71 +396,72 @@ export default Navbar;
 //         </div>
 //         {isMenuOpen && (
 //           <div className="lg:hidden mt-2">
-//             <div className="bg-white absolute right-0 top-full mt-2 w-48 rounded-md shadow-lg ring-1 ring-black ring-opacity-5">
-//               <div className="py-1">
-//                 <Link
-//                   to="/"
-//                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-//                 >
-//                   {t('navbar.home')}
-//                 </Link>
-//                 <Link
-//                   to="/news"
-//                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-//                 >
-//                   {t('navbar.news')}
-//                 </Link>
-//                 <Link
-//                   to="/sports"
-//                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-//                 >
-//                   {t('navbar.sports')}
-//                 </Link>
-//                 <Link
-//                   to="/business"
-//                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-//                 >
-//                   {t('navbar.business')}
-//                 </Link>
-//                 <Link
-//                   to="/innovation"
-//                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-//                 >
-//                   {t('navbar.innovation')}
-//                 </Link>
-//                 <Link
-//                   to="/culture"
-//                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-//                 >
-//                   {t('navbar.culture')}
-//                 </Link>
-//                 <Link
-//                   to="/travel"
-//                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-//                 >
-//                   {t('navbar.travel')}
-//                 </Link>
-//                 <Link
-//                   to="/earth"
-//                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-//                 >
-//                   {t('navbar.earth')}
-//                 </Link>
-//                 <Link
-//                   to="/addarticle"
-//                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-//                 >
-//                   {t('navbar.addArticle')}
-//                 </Link>
-//                 <button
-//                   onClick={handleLogout}
-//                   className="block w-full px-4 py-2 text-left text-sm font-medium text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-//                 >
-//                   {t('navbar.logout')}
-//                 </button>
-//               </div>
-//             </div>
-//           </div>
+//   <div className="bg-white absolute right-0 top-full mt-2 w-48 rounded-md shadow-lg ring-1 ring-black ring-opacity-5">
+//     <div className="py-1">
+//       <Link
+//         to="/"
+//         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+//       >
+//         {t('navbar.home')}
+//       </Link>
+//       <Link
+//         to={`/${locale}/news`}
+//         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+//       >
+//         {t('navbar.news')}
+//       </Link>
+//       <Link
+//         to={`/${locale}/sports`}
+//         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+//       >
+//         {t('navbar.sports')}
+//       </Link>
+//       <Link
+//         to={`/${locale}/business`}
+//         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+//       >
+//         {t('navbar.business')}
+//       </Link>
+//       <Link
+//         to={`/${locale}/innovation`}
+//         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+//       >
+//         {t('navbar.innovation')}
+//       </Link>
+//       <Link
+//         to={`/${locale}/culture`}
+//         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+//       >
+//         {t('navbar.culture')}
+//       </Link>
+//       <Link
+//         to={`/${locale}/travel`}
+//         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+//       >
+//         {t('navbar.travel')}
+//       </Link>
+//       <Link
+//         to={`/${locale}/earth`}
+//         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+//       >
+//         {t('navbar.earth')}
+//       </Link>
+//       <Link
+//         to={`/${locale}/addarticle`}
+//         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+//       >
+//         {t('navbar.addArticle')}
+//       </Link>
+//       <button
+//         onClick={handleLogout}
+//         className="block w-full px-4 py-2 text-left text-sm font-medium text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+//       >
+//         {t('navbar.logout')}
+//       </button>
+//     </div>
+//   </div>
+// </div>
+
 //         )}
 //       </div>
 //     </nav>

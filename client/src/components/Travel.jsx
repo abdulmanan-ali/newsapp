@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import useFetch from '../hooks/useFetch';
 
-const Travel = () => {
-    let { loading, blogData, error } = useFetch('http://localhost:1337/api/blogs?populate=*&filters[category][Name][$eq]=Travel');
+const Travel = ({ locale }) => {
+    let { loading, blogData, error } = useFetch(`http://localhost:1337/api/blogs?populate=*&filters[category][Name][$eq]=Travel&locale=${locale}`, locale);
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error!</p>;
 
