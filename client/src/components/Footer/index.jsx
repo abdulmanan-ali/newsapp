@@ -5,7 +5,8 @@ const Footer = () => {
   const { t } = useTranslation();
 
   return (
-    <footer className="bg-[#02044A] text-gray-300 py-8 px-4 ">
+    <footer className="bg-[#000] text-gray-300 py-8 px-4 ">
+    {/* <footer className="bg-[#02044A] text-gray-300 py-8 px-4 "> */}
       <div className="container mx-auto flex flex-col justify-between items-center">
         <div className="flex flex-row space-x-4">
           <a href="#" className="text-white hover:text-blue-500">{t('footer.aboutUs')}</a>

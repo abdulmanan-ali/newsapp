@@ -7,7 +7,7 @@
     "innovation": "جدت",
     "culture": "ثقافت",
     "travel": "سفر",
-    "earth": "زمین",
+    "earth": "ورلڈ",
     "addArticle": "مضمون شامل کریں",
     "language": "زبان",
     "english": "English",
@@ -22,5 +22,16 @@
     "twitter": "ٹوئٹر",
     "instagram": "انسٹاگرام",
     "copyright": "© 2024 ملٹی لنگول نیوز۔ تمام حقوق محفوظ ہیں۔"
+  },
+  "blog": {
+    "Top News & Articles": "سب سے اہم خبریں اور مضامین",
+    "Multilingual News": "ملٹی لنگول نیوز"
+  },
+  "comment": {
+    "Leave a Comment": "اپنی رائے لکھیں",
+    "Name": "نام",
+    "Comment": "تبصرہ",
+    "Submit": "سبمٹ ",
+    "Comments": "کمنٹس"
   }
 }

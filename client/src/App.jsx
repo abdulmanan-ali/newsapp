@@ -46,10 +46,9 @@ function App() {
         <Routes>
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/login" element={<Login />} />
           <Route path="/logout" element={<Login />} />
-          {user && <Route path="/:locale/addarticle" exact element={<AddArticle locale={locale}/>} />}
-          <Route path="/addarticle" element={<Navigate to={`/login`} />} />
+          {user && <Route path="/:locale/addarticle" exact element={<AddArticle locale={locale} />} />}
+          <Route path="/:locale/addarticle" element={<Navigate to={`/login`} />} />
           <Route path="/" element={<Navigate to={`/${locale}`} />} />
           <Route path="/:locale" element={<Blogs locale={locale} blogData={blogData} />} />
           <Route path="/:locale/sports" element={<Sports locale={locale} />} />

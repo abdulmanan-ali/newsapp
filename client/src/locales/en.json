@@ -22,5 +22,16 @@
     "twitter": "Twitter",
     "instagram": "Instagram",
     "copyright": "© 2024 Multilingual News. All Rights Reserved."
+  },
+  "blog": {
+    "Top News & Articles": "Top News & Articles",
+    "Multilingual News": "Multilingual News"
+  },
+  "comment": {
+    "Leave a Comment": "Leave a Comment",
+    "Name": "Name",
+    "Comment": "Comment",
+    "Submit": "Submit",
+    "Comments": "Comments "
   }
 }

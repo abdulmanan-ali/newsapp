@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import ReactMarkdown from 'react-markdown';
+import { useTranslation } from 'react-i18next';
 
 const BlogContent = ({ blogs }) => {
+
+  const { t } = useTranslation();
   const { slug } = useParams();
 
   let blog = {};
@@ -110,10 +113,10 @@ const BlogContent = ({ blogs }) => {
 
               {/* Comment Section */}
               <div className="mt-8 border-t pt-8">
-                <h2 className="text-xl font-semibold mb-4 text-center">Leave a Comment</h2>
+                <h2 className="text-xl font-semibold mb-4 text-center">{t("comment.Leave a Comment")}</h2>
                 <form onSubmit={handleCommentSubmit}>
                   <div className="mb-4">
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-700">{t("comment.Name")}</label>
                     <input
                       type="text"
                       id="name"
@@ -125,7 +128,7 @@ const BlogContent = ({ blogs }) => {
                     />
                   </div>
                   <div className="mb-4">
-                    <label htmlFor="comment" className="block text-sm font-medium text-gray-700">Comment</label>
+                    <label htmlFor="comment" className="block text-sm font-medium text-gray-700">{t("comment.Comment")}</label>
                     <textarea
                       id="comment"
                       name="comment"
@@ -141,7 +144,7 @@ const BlogContent = ({ blogs }) => {
                       type="submit"
                       className="bg-indigo-500 text-white py-2 px-4 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600"
                     >
-                      Submit
+                      {t("comment.Submit")}
                     </button>
                   </div>
                 </form>
@@ -149,7 +152,7 @@ const BlogContent = ({ blogs }) => {
 
               {/* Display Comments */}
               <div className="mt-8 border-t pt-8">
-                <h2 className="text-xl font-semibold mb-4 text-center">Comments</h2>
+                <h2 className="text-xl font-semibold mb-4 text-center">{t("comment.Comments")}</h2>
                 {comments.map((comment) => (
                   <div key={comment.id} className="flex items-start space-x-4 mb-4">
                     {comment.attributes.image && comment.attributes.image.length > 0 ? (
