@@ -55,7 +55,7 @@ const Navbar = ({ locale }) => {
             <img src={Logo} alt="Logo" className="h-16 w-16" />
           </Link>
           <Link to="/">
-          <h2 className="text-xl font-bold ml">{t("blog.Multilingual News")}</h2>
+            <h2 className="text-xl font-bold ml text-red-600">{t("blog.Multilingual News")}</h2>
           </Link>
           <div className="lg:hidden">
             <button

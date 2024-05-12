@@ -85,7 +85,7 @@ const AddArticle = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-center mt-9 mb-8">Add Article</h1>
+      <h1 className="text-3xl font-bold text-center mt-9 mb-8 text-red-600">Add Article</h1>
 
       <form
         className="grid grid-cols-1 gap-6 bg-white rounded-lg shadow-md p-9"
@@ -213,8 +213,8 @@ const AddArticle = () => {
         <div className="text-center">
           <button
             type="submit"
-            className="bg-indigo-500 text-white py-2 px-4 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600"
-          >
+            className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 focus:outline-none focus:bg-red-600"
+            >
             Submit
           </button>
         </div>

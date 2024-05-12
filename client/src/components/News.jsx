@@ -12,7 +12,7 @@ const News = ({ locale }) => {
         <div className="flex flex-col min-h-screen">
             <main className="flex-grow px-4 py-8">
                 <div className="max-w-[1240px] mx-auto mb-8">
-                    <h1 className="text-4xl font-bold text-left mb-4">News</h1>
+                    <h1 className="text-4xl font-bold text-left mb-4 text-red-600">NEWS</h1>
                     <div className="flex items-center">
                         <hr className="border-b-2 border-black flex-grow" />
                     </div>
