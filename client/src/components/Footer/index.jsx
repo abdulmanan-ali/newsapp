@@ -1,30 +1,85 @@
 import React from "react";
 import { useTranslation } from 'react-i18next';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const Footer = () => {
   const { t } = useTranslation();
 
   return (
-    <footer className="bg-[#000] text-gray-300 py-8 px-4 ">
-    {/* <footer className="bg-[#02044A] text-gray-300 py-8 px-4 "> */}
+    <footer className="bg-[#000] text-gray-300 py-8 px-4">
       <div className="container mx-auto flex flex-col justify-between items-center">
-        <div className="flex flex-row space-x-4">
-          <a href="#" className="text-white hover:text-blue-500">{t('footer.aboutUs')}</a>
-          <a href="#" className="text-white hover:text-blue-500">{t('footer.contactUs')}</a>
-          <a href="#" className="text-white hover:text-blue-500">{t('footer.privacyPolicy')}</a>
+        <div className="flex flex-row space-x-4 mb-6">
+          <a href="#" className="text-white hover:text-red-600">{t('footer.aboutUs')}</a>
+          <a href="#" className="text-white hover:text-red-600">{t('footer.contactUs')}</a>
+          <a href="#" className="text-white hover:text-red-600">{t('footer.privacyPolicy')}</a>
         </div>
-        <div className="flex flex-row space-x-4 mt-4">
-          <a href="#" className="text-white hover:text-blue-500">{t('footer.facebook')}</a>
-          <a href="#" className="text-white hover:text-blue-500">{t('footer.twitter')}</a>
-          <a href="#" className="text-white hover:text-blue-500">{t('footer.instagram')}</a>
+        <div className="flex flex-row space-x-4 mb-6">
+          <a href="#" className="text-white hover:text-red-600">
+            <i className="fab fa-facebook-f"></i> {t('footer.facebook')}
+          </a>
+          <a href="#" className="text-white hover:text-red-600">
+            <i className="fab fa-twitter"></i> {t('footer.twitter')}
+          </a>
+          <a href="#" className="text-white hover:text-red-600">
+            <i className="fab fa-instagram"></i> {t('footer.instagram')}
+          </a>
         </div>
-        <p className="text-center mt-4 text-sm">{t('footer.copyright')}</p>
+        <div className="flex flex-row items-center space-x-2 mb-4">
+          <div className="relative">
+            <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+              <i className="fas fa-envelope text-gray-500"></i>
+            </span>
+            <input 
+              type="email" 
+              placeholder="Your email address..." 
+              className="pl-10 px-4 py-2 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-red-600"
+            />
+          </div>
+          <button 
+            className="px-3 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-600"
+          >
+            Subscribe
+          </button>
+        </div>
+        <hr className="w-full border-t border-gray-700 my-4" />
+        <p className="text-center text-sm">{t('footer.copyright')}</p>
       </div>
     </footer>
   );
 };
 
 export default Footer;
+
+
+
+
+// import React from "react";
+// import { useTranslation } from 'react-i18next';
+
+// const Footer = () => {
+//   const { t } = useTranslation();
+
+//   return (
+//     <footer className="bg-[#000] text-gray-300 py-8 px-4 ">
+//     {/* <footer className="bg-[#02044A] text-gray-300 py-8 px-4 "> */}
+//       <div className="container mx-auto flex flex-col justify-between items-center">
+//         <div className="flex flex-row space-x-4">
+//           <a href="#" className="text-white hover:text-red-600">{t('footer.aboutUs')}</a>
+//           <a href="#" className="text-white hover:text-red-600">{t('footer.contactUs')}</a>
+//           <a href="#" className="text-white hover:text-red-600">{t('footer.privacyPolicy')}</a>
+//         </div>
+//         <div className="flex flex-row space-x-4 mt-4">
+//           <a href="#" className="text-white hover:text-red-600">{t('footer.facebook')}</a>
+//           <a href="#" className="text-white hover:text-red-600">{t('footer.twitter')}</a>
+//           <a href="#" className="text-white hover:text-red-600">{t('footer.instagram')}</a>
+//         </div>
+//         <p className="text-center mt-4 text-sm">{t('footer.copyright')}</p>
+//       </div>
+//     </footer>
+//   );
+// };
+
+// export default Footer;
 
 
 
@@ -130,7 +185,7 @@ export default Footer;
 
 //             </div>
 
-//             <div className='flex flex-col max-w-[1240px] px-2 py-4 m-auto justify-between sm:flex-row text-center text-gray-500 items-center'>
+//             <div className='flex flex-col max-w-[1240px] px-2 py-4 m-auto justify-between sm:flex-row text-center text-red-600 items-center'>
 //                 <p>2022 CWTS, LLC. All rights reserved.</p>
 //                 {/* <div className='flex justify-between sm:w-[300px] pt-4 text-2xl gap-2'>
 //                 <FaFacebook />

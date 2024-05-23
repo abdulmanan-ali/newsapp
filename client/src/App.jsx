@@ -15,6 +15,8 @@ import Business from "./components/Business";
 import Culture from "./components/Culture";
 import Travel from "./components/Travel";
 import useFetch from "./hooks/useFetch";
+import Loading from "./components/Loading";
+import ServerError from "./components/ServerError";
 
 function App() {
   const location = useLocation();
@@ -36,8 +38,9 @@ function App() {
 
   const user = localStorage.getItem("token");
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error!</p>;
+  if (loading) return <> <Loading /> </>;
+  if (error) return <> <ServerError /> </>;
+
 
   return (
     <>

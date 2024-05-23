@@ -142,7 +142,7 @@ const BlogContent = ({ blogs }) => {
                   <div className="text-center">
                     <button
                       type="submit"
-                      className="bg-indigo-500 text-white py-2 px-4 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600"
+                      className="bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700 focus:outline-none focus:bg-indigo-600"
                     >
                       {t("comment.Submit")}
                     </button>

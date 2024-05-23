@@ -1,12 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import useFetch from '../hooks/useFetch';
+import Loading from './Loading';
+import ServerError from './ServerError';
 
 const News = ({ locale }) => {
     const { loading, blogData, error } = useFetch(`http://localhost:1337/api/blogs?populate=*&filters[category][Name][$eq]=News&locale=${locale}`, locale);
 
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error!</p>;
+    if (loading) return <> <Loading /> </>
+
+    if (error) return <> <ServerError /></>;
 
     return (
         <div className="flex flex-col min-h-screen">
