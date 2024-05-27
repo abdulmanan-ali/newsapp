@@ -49,12 +49,12 @@ const Navbar = ({ locale }) => {
   };
 
   return (
-    <nav className="bg-[#000] text-white flex items-center justify-between h-16 px-4 mx-auto sticky top-0 z-10">
+    <nav className="bg-[#fff] text-black flex items-center justify-between h-16 px-4 mx-auto sticky top-0 z-10 shadow-lg">
       <div className="container mx-auto px-2">
         <div className="flex justify-between items-center">
           <Link to="/" className="flex items-center">
             <img src={Logo} alt="Logo" className="h-14 w-14" />
-            <h2 className="text-xl font-bold text-gray-100 ml-3">{t("blog.Multilingual News")}</h2>
+            <h2 className="text-xl font-semibold text-black ml-3">{t("blog.Multilingual News")}</h2>
           </Link>
 
           <div className="lg:hidden">
@@ -68,39 +68,39 @@ const Navbar = ({ locale }) => {
           </div>
           <div className="hidden lg:flex items-center space-x-4 flex-grow justify-end">
             <div className="flex space-x-4 items-center">
-              <Link to="/" className="hover:underline hover:text-red-600 flex items-center">
+              <Link to="/" className="hover:underline hover:text-red-600 flex items-center font-semibold">
                 <FontAwesomeIcon icon={faHome} className="mr-1" />
                 {t('navbar.home')}
               </Link>
-              <Link to={`/${locale}/news`} className="hover:underline hover:text-red-600 flex items-center">
+              <Link to={`/${locale}/news`} className="hover:underline hover:text-red-600 flex items-center font-semibold">
                 {/* <FontAwesomeIcon icon={faNewspaper} className="mr-1" /> */}
                 {t('navbar.news')}
               </Link>
-              <Link to={`/${locale}/sports`} className="hover:underline hover:text-red-600 flex items-center">
+              <Link to={`/${locale}/sports`} className="hover:underline hover:text-red-600 flex items-center font-semibold">
                 {/* <FontAwesomeIcon icon={faFootballBall} className="mr-1" /> */}
                 {t('navbar.sports')}
               </Link>
-              <Link to={`/${locale}/business`} className="hover:underline hover:text-red-600 flex items-center">
+              <Link to={`/${locale}/business`} className="hover:underline hover:text-red-600 flex items-center font-semibold">
                 {/* <FontAwesomeIcon icon={faBriefcase} className="mr-1" /> */}
                 {t('navbar.business')}
               </Link>
-              <Link to={`/${locale}/innovation`} className="hover:underline hover:text-red-600 flex items-center">
+              <Link to={`/${locale}/innovation`} className="hover:underline hover:text-red-600 flex items-center font-semibold">
                 {/* <FontAwesomeIcon icon={faLightbulb} className="mr-1" /> */}
                 {t('navbar.innovation')}
               </Link>
-              <Link to={`/${locale}/culture`} className="hover:underline hover:text-red-600 flex items-center">
+              <Link to={`/${locale}/culture`} className="hover:underline hover:text-red-600 flex items-center font-semibold">
                 {/* <FontAwesomeIcon icon={faPalette} className="mr-1" /> */}
                 {t('navbar.culture')}
               </Link>
-              <Link to={`/${locale}/travel`} className="hover:underline hover:text-red-600 flex items-center">
+              <Link to={`/${locale}/travel`} className="hover:underline hover:text-red-600 flex items-center font-semibold">
                 {/* <FontAwesomeIcon icon={faPlane} className="mr-1" /> */}
                 {t('navbar.travel')}
               </Link>
-              <Link to={`/${locale}/earth`} className="hover:underline hover:text-red-600 flex items-center">
+              <Link to={`/${locale}/earth`} className="hover:underline hover:text-red-600 flex items-center font-semibold">
                 {/* <FontAwesomeIcon icon={faGlobe} className="mr-1" /> */}
                 {t('navbar.earth')}
               </Link>
-              <Link to={`/${locale}/addarticle`} className="hover:underline hover:text-red-600 flex items-center">
+              <Link to={`/${locale}/addarticle`} className="hover:underline hover:text-red-600 flex items-center font-semibold">
                 <FontAwesomeIcon icon={faPen} className="mr-1" />
                 {t('navbar.addArticle')}
               </Link>
@@ -109,7 +109,7 @@ const Navbar = ({ locale }) => {
               <button
                 type="button"
                 onClick={() => setIsLanguageOpen(!isLanguageOpen)}
-                className="hover:underline hover:text-red-600 flex items-center"
+                className="hover:underline hover:text-red-600 flex items-center font-semibold"
               >
                 {/* <FontAwesomeIcon icon={faLanguage} className="mr-1" /> */}
                 <FontAwesomeIcon icon={faGlobe} className="mr-1" />
@@ -142,12 +142,12 @@ const Navbar = ({ locale }) => {
               )}
             </div>
           </div>
-          <div className="hidden lg:flex ml-4">
+          <div className="hidden lg:flex ml-6">
             <button
               onClick={handleLogout}
               className="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-9000"
             >
-              <FontAwesomeIcon icon={faSignOutAlt} className="mr-1" />
+              {/* <FontAwesomeIcon icon={faSignOutAlt} className="mr-1" /> */}
               {t('navbar.logout')}
             </button>
           </div>
@@ -294,7 +294,7 @@ export default Navbar;
 //         <div className="flex justify-between items-center">
 //           <Link to="/" className="flex items-center">
 //             <img src={Logo} alt="Logo" className="h-14 w-14" />
-//             <h2 className="text-xl font-bold text-gray-100 ml-3">{t("blog.Multilingual News")}</h2>
+//             <h2 className="text-xl font-semibold text-gray-100 ml-3">{t("blog.Multilingual News")}</h2>
 //           </Link>
 
 //           <div className="lg:hidden">
@@ -402,7 +402,7 @@ export default Navbar;
 //           <div className="hidden lg:flex">
 //             <button
 //               onClick={handleLogout}
-//               className="bg-white text-gray-800 font-bold py-2 px-4 rounded-md"
+//               className="bg-white text-gray-800 font-semibold py-2 px-4 rounded-md"
 //             >
 //               {t('navbar.logout')}
 //             </button>

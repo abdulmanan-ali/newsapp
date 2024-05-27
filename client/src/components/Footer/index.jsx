@@ -24,23 +24,34 @@ const Footer = () => {
             <i className="fab fa-instagram"></i> {t('footer.instagram')}
           </a>
         </div>
-        <div className="flex flex-row items-center space-x-2 mb-4">
+        <form 
+          action="https://gmail.us22.list-manage.com/subscribe/post?u=1a812acb90ecd846211a13f8d&amp;id=339e864d09&amp;f_id=002cc8e1f0" 
+          method="post" 
+          target="_blank"
+          className="flex flex-row items-center space-x-2 mb-4"
+        >
           <div className="relative">
             <span className="absolute inset-y-0 left-0 flex items-center pl-3">
               <i className="fas fa-envelope text-gray-500"></i>
             </span>
             <input 
               type="email" 
+              name="EMAIL"
               placeholder="Your email address..." 
               className="pl-10 px-4 py-2 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-red-600"
+              required
             />
           </div>
           <button 
+            type="submit"
             className="px-3 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-600"
           >
             Subscribe
           </button>
-        </div>
+          <div style={{position: "absolute", left: "-5000px"}} aria-hidden="true">
+            <input type="text" name="b_1a812acb90ecd846211a13f8d_339e864d09" tabIndex="-1" defaultValue="" />
+          </div>
+        </form>
         <hr className="w-full border-t border-gray-700 my-4" />
         <p className="text-center text-sm">{t('footer.copyright')}</p>
       </div>
@@ -49,6 +60,72 @@ const Footer = () => {
 };
 
 export default Footer;
+
+
+
+// import React from "react";
+// import { useTranslation } from 'react-i18next';
+// import '@fortawesome/fontawesome-free/css/all.min.css';
+
+// const Footer = () => {
+//   const { t } = useTranslation();
+
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+//     const email = e.target.email.value;
+//     if (email) {
+//       window.open("http://eepurl.com/iQD9eU", "_blank");
+//     }
+//   };
+
+//   return (
+//     <footer className="bg-[#000] text-gray-300 py-8 px-4">
+//       <div className="container mx-auto flex flex-col justify-between items-center">
+//         <div className="flex flex-row space-x-4 mb-6">
+//           <a href="#" className="text-white hover:text-red-600">{t('footer.aboutUs')}</a>
+//           <a href="#" className="text-white hover:text-red-600">{t('footer.contactUs')}</a>
+//           <a href="#" className="text-white hover:text-red-600">{t('footer.privacyPolicy')}</a>
+//         </div>
+//         <div className="flex flex-row space-x-4 mb-6">
+//           <a href="#" className="text-white hover:text-red-600">
+//             <i className="fab fa-facebook-f"></i> {t('footer.facebook')}
+//           </a>
+//           <a href="#" className="text-white hover:text-red-600">
+//             <i className="fab fa-twitter"></i> {t('footer.twitter')}
+//           </a>
+//           <a href="#" className="text-white hover:text-red-600">
+//             <i className="fab fa-instagram"></i> {t('footer.instagram')}
+//           </a>
+//         </div>
+//         <form onSubmit={handleSubmit} className="flex flex-row items-center space-x-2 mb-4">
+//           <div className="relative">
+//             <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+//               <i className="fas fa-envelope text-gray-500"></i>
+//             </span>
+//             <input
+//               type="email"
+//               name="email"
+//               placeholder="Your email address..."
+//               className="pl-10 px-4 py-2 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-red-600"
+//               required
+//             />
+//           </div>
+//           <button
+//             type="submit"
+//             className="px-3 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-600"
+//           >
+//             Subscribe
+//           </button>
+//         </form>
+//         <hr className="w-full border-t border-gray-700 my-4" />
+//         <p className="text-center text-sm">{t('footer.copyright')}</p>
+//       </div>
+//     </footer>
+//   );
+// };
+
+// export default Footer;
+
 
 
 

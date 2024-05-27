@@ -123,7 +123,7 @@ const BlogContent = ({ blogs }) => {
                       name="name"
                       value={commentFormData.name}
                       onChange={handleCommentChange}
-                      className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+                      className="mt-1 p-2 w-full border focus:outline-none focus:ring-1 focus:ring-red-600 border-gray-300 rounded-md"
                       required
                     />
                   </div>
@@ -134,7 +134,7 @@ const BlogContent = ({ blogs }) => {
                       name="comment"
                       value={commentFormData.comment}
                       onChange={handleCommentChange}
-                      className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+                      className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-red-600 border-gray-300 rounded-md"
                       rows="4"
                       required
                     ></textarea>
