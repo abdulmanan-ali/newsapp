@@ -125,14 +125,14 @@ const Navbar = ({ locale }) => {
                   >
                     <button
                       onClick={() => changeLanguage('en')}
-                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
+                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900 hover:underline hover:text-red-600"
                       role="menuitem"
                     >
                       {t('navbar.english')}
                     </button>
                     <button
                       onClick={() => changeLanguage('ur')}
-                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900"
+                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 hover:text-gray-900 hover:underline hover:text-red-600"
                       role="menuitem"
                     >
                       {t('navbar.urdu')}
@@ -158,70 +158,70 @@ const Navbar = ({ locale }) => {
               <div className="py-1">
                 <Link
                   to="/"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 hover:underline hover:text-red-600 hover:underline hover:text-red-600"
                 >
                   <FontAwesomeIcon icon={faHome} className="mr-1" />
                   {t('navbar.home')}
                 </Link>
                 <Link
                   to={`/${locale}/news`}
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 hover:underline hover:text-red-600"
                 >
                   <FontAwesomeIcon icon={faNewspaper} className="mr-1" />
                   {t('navbar.news')}
                 </Link>
                 <Link
                   to={`/${locale}/sports`}
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 hover:underline hover:text-red-600"
                 >
                   <FontAwesomeIcon icon={faFootballBall} className="mr-1" />
                   {t('navbar.sports')}
                 </Link>
                 <Link
                   to={`/${locale}/business`}
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 hover:underline hover:text-red-600"
                 >
                   <FontAwesomeIcon icon={faBriefcase} className="mr-1" />
                   {t('navbar.business')}
                 </Link>
                 <Link
                   to={`/${locale}/innovation`}
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 hover:underline hover:text-red-600"
                 >
                   <FontAwesomeIcon icon={faLightbulb} className="mr-1" />
                   {t('navbar.innovation')}
                 </Link>
                 <Link
                   to={`/${locale}/culture`}
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 hover:underline hover:text-red-600"
                 >
                   <FontAwesomeIcon icon={faPalette} className="mr-1" />
                   {t('navbar.culture')}
                 </Link>
                 <Link
                   to={`/${locale}/travel`}
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 hover:underline hover:text-red-600"
                 >
                   <FontAwesomeIcon icon={faPlane} className="mr-1" />
                   {t('navbar.travel')}
                 </Link>
                 <Link
                   to={`/${locale}/earth`}
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 hover:underline hover:text-red-600"
                 >
                   <FontAwesomeIcon icon={faGlobe} className="mr-1" />
                   {t('navbar.earth')}
                 </Link>
                 <Link
                   to={`/${locale}/addarticle`}
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 hover:underline hover:text-red-600"
                 >
                   <FontAwesomeIcon icon={faPlus} className="mr-1" />
                   {t('navbar.addArticle')}
                 </Link>
                 <button
                   onClick={handleLogout}
-                  className="block w-full px-4 py-2 text-left text-sm font-medium text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                  className="block w-full px-4 py-2 text-left text-sm font-medium text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 hover:underline hover:text-red-600"
                 >
                   <FontAwesomeIcon icon={faSignOutAlt} className="mr-1" />
                   {t('navbar.logout')}
@@ -380,14 +380,14 @@ export default Navbar;
 //                   >
 //                     <button
 //                       onClick={() => changeLanguage('en')}
-//                       className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+//                       className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 hover:underline hover:text-red-600"
 //                       role="menuitem"
 //                     >
 //                       {t('navbar.english')}
 //                     </button>
 //                     <button
 //                       onClick={() => changeLanguage('ur')}
-//                       className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+//                       className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 hover:underline hover:text-red-600"
 //                       role="menuitem"
 //                     >
 //                       {t('navbar.urdu')}
@@ -414,55 +414,55 @@ export default Navbar;
 //               <div className="py-1">
 //                 <Link
 //                   to="/"
-//                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+//                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 hover:underline hover:text-red-600"
 //                 >
 //                   {t('navbar.home')}
 //                 </Link>
 //                 <Link
 //                   to={`/${locale}/news`}
-//                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+//                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 hover:underline hover:text-red-600"
 //                 >
 //                   {t('navbar.news')}
 //                 </Link>
 //                 <Link
 //                   to={`/${locale}/sports`}
-//                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+//                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 hover:underline hover:text-red-600"
 //                 >
 //                   {t('navbar.sports')}
 //                 </Link>
 //                 <Link
 //                   to={`/${locale}/business`}
-//                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+//                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 hover:underline hover:text-red-600"
 //                 >
 //                   {t('navbar.business')}
 //                 </Link>
 //                 <Link
 //                   to={`/${locale}/innovation`}
-//                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+//                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 hover:underline hover:text-red-600"
 //                 >
 //                   {t('navbar.innovation')}
 //                 </Link>
 //                 <Link
 //                   to={`/${locale}/culture`}
-//                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+//                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 hover:underline hover:text-red-600"
 //                 >
 //                   {t('navbar.culture')}
 //                 </Link>
 //                 <Link
 //                   to={`/${locale}/travel`}
-//                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+//                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 hover:underline hover:text-red-600"
 //                 >
 //                   {t('navbar.travel')}
 //                 </Link>
 //                 <Link
 //                   to={`/${locale}/earth`}
-//                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+//                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 hover:underline hover:text-red-600"
 //                 >
 //                   {t('navbar.earth')}
 //                 </Link>
 //                 <Link
 //                   to={`/${locale}/addarticle`}
-//                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+//                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 hover:underline hover:text-red-600"
 //                 >
 //                   {t('navbar.addArticle')}
 //                 </Link>
