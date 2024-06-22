@@ -3,8 +3,13 @@ import { Link } from 'react-router-dom';
 import useFetch from '../hooks/useFetch';
 import Loading from './Loading';
 import ServerError from './ServerError';
+import { useTranslation } from 'react-i18next';
+
 
 const News = ({ locale }) => {
+    const { t, i18n } = useTranslation();
+
+
     const { loading, blogData, error } = useFetch(`http://localhost:1337/api/blogs?populate=*&filters[category][Name][$eq]=News&locale=${locale}`, locale);
 
     if (loading) return <> <Loading /> </>
@@ -15,7 +20,7 @@ const News = ({ locale }) => {
         <div className="flex flex-col min-h-screen">
             <main className="flex-grow px-4 py-8">
                 <div className="max-w-[1240px] mx-auto mb-8">
-                    <h1 className="text-4xl font-bold text-left mb-4 text-red-600">NEWS</h1>
+                    <h1 className="text-4xl font-bold text-left mb-4 text-red-600">{t('blog.news')}</h1>
                     <div className="flex items-center">
                         <hr className="border-b-2 border-black flex-grow" />
                     </div>

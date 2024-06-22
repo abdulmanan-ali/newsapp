@@ -25,7 +25,23 @@
   },
   "blog": {
     "Top News & Articles": "سب سے اہم خبریں اور مضامین",
-    "Multilingual News": "ملٹی لنگول نیوز"
+    "Multilingual News": "ملٹی لنگول نیوز",
+    "year ago": "سال پہلے",
+    "month ago": "مہینہ پہلے",
+    "week ago": "ہفتہ پہلے",
+    "day ago": "day ago",
+    "hour ago": "hour ago",
+    "minute ago": "minute ago",
+    "seconds ago": "seconds ago",
+    "home": "ہوم",
+    "news": "خبریں",
+    "sports": "کھیل",
+    "business": "کاروبار",
+    "innovation": "جدت",
+    "culture": "ثقافت",
+    "travel": "سفر",
+    "earth": "ورلڈ",
+    "addArticle": "مضمون شامل کریں"
   },
   "comment": {
     "Leave a Comment": "اپنی رائے لکھیں",

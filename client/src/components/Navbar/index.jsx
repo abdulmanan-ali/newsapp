@@ -73,32 +73,32 @@ const Navbar = ({ locale }) => {
           </div>
           <div className="hidden lg:flex items-center space-x-4 flex-grow justify-end">
             <div className="flex space-x-4 items-center">
-              <Link to="/" className={`hover:text-red-600 flex items-center font-semibold ${isActiveRoute('/') ? 'border-b-4 border-red-600' : ''}`}>
-                <FontAwesomeIcon icon={faHome} className="mr-1" />
-                {t('navbar.home')}
+              <Link to="/" className={`hover:text-red-600 flex items-center font-semibold`}>
+                <FontAwesomeIcon icon={faHome} className="mr-1 text-red-600" />
+                {/* {t('navbar.home')} */}
               </Link>
-              <Link to={`/${locale}/news`} className={`hover:text-red-600 flex items-center font-semibold ${isActiveRoute(`/${locale}/news`) ? 'h-16 border-b-4 border-red-600' : ''}`}>
+              <Link to={`/${locale}/news`} className={`hover:text-red-600 flex items-center font-semibold ${isActiveRoute(`/${locale}/news`) ? 'h-16 border-b-4 rounded border-red-600 text-red-600' : ''}`}>
                 {t('navbar.news')}
               </Link>
-              <Link to={`/${locale}/sports`} className={`hover:text-red-600 flex items-center font-semibold ${isActiveRoute(`/${locale}/sports`) ? 'h-16 border-b-4 border-red-600' : ''}`}>
+              <Link to={`/${locale}/sports`} className={`hover:text-red-600 flex items-center font-semibold ${isActiveRoute(`/${locale}/sports`) ? 'h-16 border-b-4 rounded border-red-600 text-red-600' : ''}`}>
                 {t('navbar.sports')}
               </Link>
-              <Link to={`/${locale}/business`} className={`hover:text-red-600 flex items-center font-semibold ${isActiveRoute(`/${locale}/business`) ? 'h-16 border-b-4 border-red-600' : ''}`}>
+              <Link to={`/${locale}/business`} className={`hover:text-red-600 flex items-center font-semibold ${isActiveRoute(`/${locale}/business`) ? 'h-16 border-b-4 rounded border-red-600 text-red-600' : ''}`}>
                 {t('navbar.business')}
               </Link>
-              <Link to={`/${locale}/innovation`} className={`hover:text-red-600 flex items-center font-semibold ${isActiveRoute(`/${locale}/innovation`) ? 'h-16 border-b-4 border-red-600' : ''}`}>
+              <Link to={`/${locale}/innovation`} className={`hover:text-red-600 flex items-center font-semibold ${isActiveRoute(`/${locale}/innovation`) ? 'h-16 border-b-4 rounded border-red-600 text-red-600' : ''}`}>
                 {t('navbar.innovation')}
               </Link>
-              <Link to={`/${locale}/culture`} className={`hover:text-red-600 flex items-center font-semibold ${isActiveRoute(`/${locale}/culture`) ? 'h-16 border-b-4 border-red-600' : ''}`}>
+              <Link to={`/${locale}/culture`} className={`hover:text-red-600 flex items-center font-semibold ${isActiveRoute(`/${locale}/culture`) ? 'h-16 border-b-4 rounded border-red-600 text-red-600' : ''}`}>
                 {t('navbar.culture')}
               </Link>
-              <Link to={`/${locale}/travel`} className={`hover:text-red-600 flex items-center font-semibold ${isActiveRoute(`/${locale}/travel`) ? 'h-16 border-b-4 border-red-600' : ''}`}>
+              <Link to={`/${locale}/travel`} className={`hover:text-red-600 flex items-center font-semibold ${isActiveRoute(`/${locale}/travel`) ? 'h-16 border-b-4  rounded border-red-600 text-red-600' : ''}`}>
                 {t('navbar.travel')}
               </Link>
-              <Link to={`/${locale}/earth`} className={`hover:text-red-600 flex items-center font-semibold ${isActiveRoute(`/${locale}/earth`) ? 'h-16 border-b-4 border-red-600' : ''}`}>
+              <Link to={`/${locale}/earth`} className={`hover:text-red-600 flex items-center font-semibold ${isActiveRoute(`/${locale}/earth`) ? 'h-16 border-b-4 rounded border-red-600 text-red-600' : ''}`}>
                 {t('navbar.earth')}
               </Link>
-              <Link to={`/${locale}/addarticle`} className={`hover:text-red-600 flex items-center font-semibold ${isActiveRoute(`/${locale}/addarticle`) ? 'h-16 border-b-4 border-red-600' : ''}`}>
+              <Link to={`/${locale}/addarticle`} className={`hover:text-red-600 flex items-center font-semibold ${isActiveRoute(`/${locale}/addarticle`) ? 'text-red-600' : ''}`}>
                 <FontAwesomeIcon icon={faPen} className="mr-1" />
                 {t('navbar.addArticle')}
               </Link>
@@ -154,63 +154,63 @@ const Navbar = ({ locale }) => {
               <div className="py-1">
                 <Link
                   to="/"
-                  className={`block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 hover:text-red-600 ${isActiveRoute('/') ? 'border-b-4 border-red-600' : ''}`}
+                  className={`block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 hover:text-red-600 ${isActiveRoute(`/${locale}`) ? 'text-red-600' : ''}`}
                 >
                   <FontAwesomeIcon icon={faHome} className="mr-1" />
                   {t('navbar.home')}
                 </Link>
                 <Link
                   to={`/${locale}/news`}
-                  className={`block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 hover:text-red-600 ${isActiveRoute(`/${locale}/news`) ? 'border-b-2 border-red-600' : ''}`}
+                  className={`block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 hover:text-red-600 ${isActiveRoute(`/${locale}/news`) ? 'text-red-600' : ''}`}
                 >
                   <FontAwesomeIcon icon={faNewspaper} className="mr-1" />
                   {t('navbar.news')}
                 </Link>
                 <Link
                   to={`/${locale}/sports`}
-                  className={`block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 hover:text-red-600 ${isActiveRoute(`/${locale}/sports`) ? 'border-b-4 border-red-600' : ''}`}
+                  className={`block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 hover:text-red-600 ${isActiveRoute(`/${locale}/sports`) ? 'text-red-600' : ''}`}
                 >
                   <FontAwesomeIcon icon={faFootballBall} className="mr-1" />
                   {t('navbar.sports')}
                 </Link>
                 <Link
                   to={`/${locale}/business`}
-                  className={`block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 hover:text-red-600 ${isActiveRoute(`/${locale}/business`) ? 'border-b-4 border-red-600' : ''}`}
+                  className={`block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 hover:text-red-600 ${isActiveRoute(`/${locale}/business`) ? 'text-red-600' : ''}`}
                 >
                   <FontAwesomeIcon icon={faBriefcase} className="mr-1" />
                   {t('navbar.business')}
                 </Link>
                 <Link
                   to={`/${locale}/innovation`}
-                  className={`block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 hover:text-red-600 ${isActiveRoute(`/${locale}/innovation`) ? 'border-b-4 border-red-600' : ''}`}
+                  className={`block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 hover:text-red-600 ${isActiveRoute(`/${locale}/innovation`) ? 'text-red-600' : ''}`}
                 >
                   <FontAwesomeIcon icon={faLightbulb} className="mr-1" />
                   {t('navbar.innovation')}
                 </Link>
                 <Link
                   to={`/${locale}/culture`}
-                  className={`block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 hover:text-red-600 ${isActiveRoute(`/${locale}/culture`) ? 'border-b-4 border-red-600' : ''}`}
+                  className={`block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 hover:text-red-600 ${isActiveRoute(`/${locale}/culture`) ? 'text-red-600' : ''}`}
                 >
                   <FontAwesomeIcon icon={faPalette} className="mr-1" />
                   {t('navbar.culture')}
                 </Link>
                 <Link
                   to={`/${locale}/travel`}
-                  className={`block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 hover:text-red-600 ${isActiveRoute(`/${locale}/travel`) ? 'border-b-4 border-red-600' : ''}`}
+                  className={`block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 hover:text-red-600 ${isActiveRoute(`/${locale}/travel`) ? 'text-red-600' : ''}`}
                 >
                   <FontAwesomeIcon icon={faPlane} className="mr-1" />
                   {t('navbar.travel')}
                 </Link>
                 <Link
                   to={`/${locale}/earth`}
-                  className={`block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 hover:text-red-600 ${isActiveRoute(`/${locale}/earth`) ? 'border-b-4 border-red-600' : ''}`}
+                  className={`block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 hover:text-red-600 ${isActiveRoute(`/${locale}/earth`) ? 'text-red-600' : ''}`}
                 >
                   <FontAwesomeIcon icon={faGlobe} className="mr-1" />
                   {t('navbar.earth')}
                 </Link>
                 <Link
                   to={`/${locale}/addarticle`}
-                  className={`block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 hover:text-red-600 ${isActiveRoute(`/${locale}/addarticle`) ? 'border-b-4 border-red-600' : ''}`}
+                  className={`block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 hover:text-red-600 ${isActiveRoute(`/${locale}/addarticle`) ? 'text-red-600' : ''}`}
                 >
                   <FontAwesomeIcon icon={faPlus} className="mr-1" />
                   {t('navbar.addArticle')}

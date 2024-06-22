@@ -25,7 +25,24 @@
   },
   "blog": {
     "Top News & Articles": "Top News & Articles",
-    "Multilingual News": "Multilingual News"
+    "Multilingual News": "Multilingual News",
+    "year ago": "year ago",
+    "month ago": "monthe ago",
+    "week ago": "week ago",
+    "day ago": "day ago",
+    "hour ago": "hour ago",
+    "minute ago": "minute ago",
+    "seconds ago": "seconds ago",
+    "home": "Home",
+    "news": "NEWS",
+    "sports": "SPORTS",
+    "business": "Business",
+    "innovation": "Innovation",
+    "culture": "Culture",
+    "travel": "Travel",
+    "earth": "EARTH",
+    "addArticle": "Add Article"
+
   },
   "comment": {
     "Leave a Comment": "Leave a Comment",
