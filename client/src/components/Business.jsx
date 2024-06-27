@@ -40,7 +40,7 @@ const News = ({ locale }) => {
                                             />
                                             <div className='p-8'>
                                                 <h3 className='font-bold text-2xl my-1 hover:underline'>{blog.attributes.blogTitle}</h3>
-                                                <p className='text-gray-600 text-medium'>{new Date(blog.attributes.updatedAt).toLocaleDateString()} | {blog.attributes.category.data.attributes.Name}</p>
+                                                <p className='text-gray-600 text-medium'>{new Date(blog.attributes.updatedAt).toLocaleDateString()} | {blog.attributes?.authorName}</p>
                                             </div>
                                         </div>
                                     </Link>

@@ -92,16 +92,16 @@ const AddArticle = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-center mt-9 mb-8 text-red-600 underline">{t('blog.addArticle')}</h1>
+      <h1 className="text-3xl font-bold text-center mt-9 mb-8 text-red-600 underline">{t('AddArticle.addArticle')}</h1>
 
       <form
-        className="grid grid-cols-1 gap-6 bg-white rounded-lg shadow-md p-9"
+        className="grid grid-cols-1 gap-6 bg-white rounded shadow-md p-9"
         onSubmit={handleSubmit}
       >
         {/* Title Field */}
         <div>
-          <label htmlFor="blogTitle" className="block text-sm font-medium text-gray-700">
-            Title
+          <label htmlFor="blogTitle" className="block text-sm font-medium text-gray-700 mb-3">
+          {t('AddArticle.Title')}
           </label>
           <input
             type="text"
@@ -116,8 +116,8 @@ const AddArticle = () => {
 
         {/* Description Field */}
         <div>
-          <label htmlFor="blogDesc" className="block text-sm font-medium text-gray-700">
-            Description
+          <label htmlFor="blogDesc" className="block text-sm font-medium text-gray-700 mb-3">
+          {t('AddArticle.Description')}
           </label>
           <input
             type="text"
@@ -132,8 +132,8 @@ const AddArticle = () => {
 
         {/* Image Upload */}
         <div>
-          <label htmlFor="coverImage" className="block text-sm font-medium text-gray-700 flex items-center">
-            <FontAwesomeIcon icon={faFileImage} className="mr-2" /> Select a Cover Image
+          <label htmlFor="coverImage" className="block text-sm font-medium text-gray-700 flex items-center mb-3">
+            <FontAwesomeIcon icon={faFileImage} className="mr-2" /> {t('AddArticle.Select a cover image')}
           </label>
           <input
             type="file"
@@ -148,8 +148,8 @@ const AddArticle = () => {
 
         {/* Category Dropdown */}
         <div>
-          <label htmlFor="category" className="block text-sm font-medium text-gray-700">
-            Select a Category
+          <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-3">
+          {t('AddArticle.Select a Category')}
           </label>
           <select
             id="category"
@@ -159,7 +159,7 @@ const AddArticle = () => {
             className="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
             required
           >
-            <option value="">Select a category</option>
+            <option value="">{t('AddArticle.Select a Category')}</option>
             {categories.map((category) => (
               <option key={category.id} value={category.id}>
                 {category.attributes.Name}
@@ -170,8 +170,8 @@ const AddArticle = () => {
 
         {/* Content Field */}
         <div>
-          <label htmlFor="blogContent" className="block text-sm font-medium text-gray-700">
-            Content
+          <label htmlFor="blogContent" className="block text-sm font-medium text-gray-700 mb-3">
+          {t('AddArticle.Content')}
           </label>
           <textarea
             id="blogContent"
@@ -184,8 +184,8 @@ const AddArticle = () => {
         </div>
 
         <div>
-          <label htmlFor="blogTitle" className="block text-sm font-medium text-gray-700 flex items-center">
-            <FontAwesomeIcon icon={faUser} className="mr-2" /> Your Name
+          <label htmlFor="blogTitle" className="block text-sm font-medium text-gray-700 flex items-center mb-3">
+            <FontAwesomeIcon icon={faUser} className="mr-2" /> {t('AddArticle.Your Name')}
           </label>
           <input
             type="text"
@@ -199,8 +199,8 @@ const AddArticle = () => {
         </div>
 
         <div>
-          <label htmlFor="coverImage" className="block text-sm font-medium text-gray-700 flex items-center">
-            <FontAwesomeIcon icon={faFileImage} className="mr-2" /> Upload Your Image
+          <label htmlFor="coverImage" className="block text-sm font-medium text-gray-700 flex items-center mb-3">
+            <FontAwesomeIcon icon={faFileImage} className="mr-2" /> {t('AddArticle.Upload Your Image')}
           </label>
           <input
             type="file"
@@ -217,12 +217,12 @@ const AddArticle = () => {
         {error && <p className="text-red-500">{error}</p>}
 
         {/* Submit Button */}
-        <div className="text-center">
+        <div className="text-center mb-3">
           <button
             type="submit"
             className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 focus:outline-none focus:bg-red-600"
           >
-            Submit
+            {t('AddArticle.Submit')}
           </button>
         </div>
       </form>
@@ -231,5 +231,3 @@ const AddArticle = () => {
 };
 
 export default AddArticle;
-
-

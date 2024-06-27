@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 
 const timeAgo = (date) => {
-  const { t, i18n } = useTranslation();
-
   const now = new Date();
   const updatedAt = new Date(date);
   const differenceInSeconds = Math.floor((now - updatedAt) / 1000);
@@ -15,8 +13,8 @@ const timeAgo = (date) => {
     { label: 'week', seconds: 604800 },
     { label: 'day', seconds: 86400 },
     { label: 'hr', seconds: 3600 },
-    { label: 'minute', seconds: 60 },
-    { label: 'second', seconds: 1 }
+    { label: 'min', seconds: 60 },
+    { label: 'sec', seconds: 1 }
   ];
 
   for (let interval of intervals) {
@@ -128,7 +126,7 @@ const Blog = ({ blogData, locale }) => {
                               alt={blog.attributes.blogTitle}
                             />
                             <div className="p-8">
-                              <h3 className="font-bold text-2xl my-1 hover:underline">
+                              <h3 className="font-bold text-2xl my-1 hover:underline hover:text-red-700">
                                 {blog.attributes.blogTitle}
                               </h3>
                               <p className="text-gray-600 text-medium p-1">

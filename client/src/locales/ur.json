@@ -41,7 +41,8 @@
     "culture": "ثقافت",
     "travel": "سفر",
     "earth": "ورلڈ",
-    "addArticle": "مضمون شامل کریں"
+    "related": "کوئی متعلقہ مضامین نہیں۔",
+    "Title": "متعلقہ مضامین"
   },
   "comment": {
     "Leave a Comment": "اپنی رائے لکھیں",
@@ -49,5 +50,16 @@
     "Comment": "تبصرہ",
     "Submit": "سبمٹ ",
     "Comments": "کمنٹس"
+  },
+  "AddArticle": {
+    "addArticle": "مضمون شامل کریں",
+    "Title": "عنوان",
+    "Description": "تفصیل",
+    "Select a cover image": "ایک سرورق کی تصویر منتخب کریں",
+    "Select a Category": "ایک زمرہ منتخب کریں",
+    "Content": "مواد",
+    "Your Name": "نام",
+    "Upload Your Image": "اپنی تصویر اپ لوڈ کریں",
+    "Submit": "سبمٹ"
   }
 }

@@ -41,8 +41,8 @@
     "culture": "Culture",
     "travel": "Travel",
     "earth": "EARTH",
-    "addArticle": "Add Article"
-
+    "related": "No Related Articles",
+    "Title": "Related Articles"
   },
   "comment": {
     "Leave a Comment": "Leave a Comment",
@@ -50,5 +50,16 @@
     "Comment": "Comment",
     "Submit": "Submit",
     "Comments": "Comments "
+  },
+  "AddArticle": {
+    "addArticle": "Add Article",
+    "Title": "Title",
+    "Description": "Description",
+    "Select a cover image": "Select a cover image",
+    "Select a Category": "Select a Category",
+    "Content": "Content",
+    "Your Name": "Your Name",
+    "Upload Your Image": "Upload Your Image",
+    "Submit": "Submit"
   }
 }
