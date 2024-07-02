@@ -12,7 +12,7 @@ const Travel = ({ locale }) => {
 
 
     let { loading, blogData, error } = useFetch(`http://localhost:1337/api/blogs?populate=*&filters[category][Name][$eq]=Travel&locale=${locale}`, locale);
-    
+
     if (loading) return <> <Loading /> </>
     if (error) return <> <ServerError /></>;
 
@@ -33,15 +33,15 @@ const Travel = ({ locale }) => {
                             {blogData?.data?.length > 0 && (
                                 blogData.data.map((blog) => (
                                     <Link key={blog.id} to={`/${blog.attributes.locale}/${blog.attributes.category.data.attributes.Name.toLowerCase()}/${blog.attributes.slug}`}>
-                                        <div className='bg-white rounded-xl overflow-hidden drop-shadow-md'>
+                                        <div className='bg-white rounded-xl overflow-hidden drop-shadow-md group'>
                                             <img
-                                                className='h-40 w-full object-cover'
+                                                className="h-40 w-full object-cover transition duration-200 group-hover:scale-110 group-hover:opacity-70"
                                                 src={`http://localhost:1337${blog.attributes.coverImage.data.attributes.url}`}
                                                 alt={blog.attributes.blogTitle}
                                             />
                                             <div className='p-8'>
-                                                <h3 className='font-bold text-2xl my-1 hover:underline'>{blog.attributes.blogTitle}</h3>
-                                                <p className='text-gray-600 text-medium'>{new Date(blog.attributes.updatedAt).toLocaleDateString()} | {blog.attributes.category.data.attributes.Name}</p>
+                                                <h3 className='font-bold text-2xl my-1 hover:underline hover:text-red-700'>{blog.attributes.blogTitle}</h3>
+                                                <p className='text-gray-600 text-medium'>{new Date(blog.attributes.updatedAt).toLocaleDateString()} | {blog.attributes?.authorName}</p>
                                             </div>
                                         </div>
                                     </Link>
