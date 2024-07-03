@@ -73,6 +73,10 @@ const Blog = ({ blogData, locale }) => {
     (blog) => !upperGridArticleIds.includes(blog.id)
   );
 
+  // Sort the filtered blog data by updatedAt in descending order
+  const sortedFilteredBlogData = filteredBlogData.sort((a, b) => new Date(b.attributes.updatedAt) - new Date(a.attributes.updatedAt));
+
+
   return (
     <>
       <div className="bg-white dark:bg-gray-100 h-full py-6 sm:py-8 lg:py-10">
@@ -84,15 +88,13 @@ const Blog = ({ blogData, locale }) => {
               {articles.left.map((article, index) => (
                 <div key={index} className="mb-8">
                   <Link
-                    to={`/${locale}/${article.attributes.category.data.attributes.Name.toLowerCase()}/${
-                      article.attributes.slug
-                    }`}
+                    to={`/${locale}/${article.attributes.category.data.attributes.Name.toLowerCase()}/${article.attributes.slug
+                      }`}
                   >
                     <Link
                       className="hover:underline hover:text-red-700"
-                      to={`/${locale}/${article.attributes.category.data.attributes.Name.toLowerCase()}/${
-                        article.attributes.slug
-                      }`}
+                      to={`/${locale}/${article.attributes.category.data.attributes.Name.toLowerCase()}/${article.attributes.slug
+                        }`}
                     >
                       <img
                         src={`http://localhost:1337${article.attributes.coverImage.data.attributes.url}`}
@@ -119,15 +121,13 @@ const Blog = ({ blogData, locale }) => {
               {articles.main && (
                 <div className="mb-8">
                   <Link
-                    to={`/${locale}/${articles.main.attributes.category.data.attributes.Name.toLowerCase()}/${
-                      articles.main.attributes.slug
-                    }`}
+                    to={`/${locale}/${articles.main.attributes.category.data.attributes.Name.toLowerCase()}/${articles.main.attributes.slug
+                      }`}
                   >
                     <Link
                       className="hover:underline hover:text-red-700"
-                      to={`/${locale}/${articles.main.attributes.category.data.attributes.Name.toLowerCase()}/${
-                        articles.main.attributes.slug
-                      }`}
+                      to={`/${locale}/${articles.main.attributes.category.data.attributes.Name.toLowerCase()}/${articles.main.attributes.slug
+                        }`}
                     >
                       <img
                         src={`http://localhost:1337${articles.main.attributes.coverImage.data.attributes.url}`}
@@ -153,9 +153,8 @@ const Blog = ({ blogData, locale }) => {
               {articles.right.map((article, index) => (
                 <div key={index} className="mb-4">
                   <Link
-                    to={`/${locale}/${article.attributes.category.data.attributes.Name.toLowerCase()}/${
-                      article.attributes.slug
-                    }`}
+                    to={`/${locale}/${article.attributes.category.data.attributes.Name.toLowerCase()}/${article.attributes.slug
+                      }`}
                   >
                     <h2 className="text-xl font-bold mb-2 hover:underline hover:text-red-700">
                       {article.attributes.blogTitle}
@@ -253,15 +252,13 @@ const Blog = ({ blogData, locale }) => {
               <div className="w-full bg-[#f9f9f9] py-[50px]">
                 <div className="max-w-[1240px] mx-auto">
                   <div className="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 ss:grid-cols-1 gap-8 text-black">
-                    {filteredBlogData?.length > 0 &&
-                      filteredBlogData.map((blog) => (
+                    {sortedFilteredBlogData?.length > 0 &&
+                      sortedFilteredBlogData.map((blog) => (
                         <Link
                           key={blog.id}
-                          to={`/${
-                            blog.attributes.locale
-                          }/${blog.attributes.category.data.attributes.Name.toLowerCase()}/${
-                            blog.attributes.slug
-                          }`}
+                          to={`/${blog.attributes.locale
+                            }/${blog.attributes.category.data.attributes.Name.toLowerCase()}/${blog.attributes.slug
+                            }`}
                         >
                           <div className="bg-white rounded-xl overflow-hidden drop-shadow-md group">
                             <img
@@ -270,7 +267,7 @@ const Blog = ({ blogData, locale }) => {
                               alt={blog.attributes.blogTitle}
                             />
                             <div className="p-8">
-                              <h3 className="font-bold text-2xl my-1 hover:underline hover:text-red-700">
+                              <h3 className="font-bold text-2xl hover:underline hover:text-red-700">
                                 {blog.attributes.blogTitle}
                               </h3>
                               <p className="text-gray-600 text-sm pt-2">

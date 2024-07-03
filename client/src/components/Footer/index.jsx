@@ -37,7 +37,7 @@ const Footer = () => {
             <input 
               type="email" 
               name="EMAIL"
-              placeholder="Your email address..." 
+              placeholder={t('footer.Your email address')} 
               className="pl-10 px-4 py-2 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-red-600"
               required
             />
@@ -46,7 +46,7 @@ const Footer = () => {
             type="submit"
             className="px-3 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-600"
           >
-            Subscribe
+            {t('footer.Subscribe')}
           </button>
           <div style={{position: "absolute", left: "-5000px"}} aria-hidden="true">
             <input type="text" name="b_1a812acb90ecd846211a13f8d_339e864d09" tabIndex="-1" defaultValue="" />

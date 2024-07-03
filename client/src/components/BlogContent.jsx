@@ -271,33 +271,32 @@ const BlogContent = ({ blogs }) => {
             <h2 className="text-xl font-semibold mb-4 text-center">
               {t("comment.Comments")} ({comments.length})
             </h2>
-            {comments.map((comment) => (
-              <div
-                key={comment.id}
-                className="bg-white rounded-lg shadow-md p-4 mb-4"
-              >
-                <div className="flex items-center space-x-4 mb-2">
-                  <img
-                    className="w-12 h-12 rounded-full object-cover"
-                    src={`http://localhost:1337${blog.attributes.authorImg.data.attributes.url}`}
-                    alt={blog.attributes?.Name}
-                  />
-                  <div>
-                    <h3 className="text-lg font-semibold">
-                      {comment.attributes?.Name}
-                    </h3>
-                    <p className="text-gray-600 text-sm">
-                      {comment.attributes?.Comment?.[0]?.children?.[0]?.text}
-                    </p>
+            {comments
+              .slice()
+              .sort((a, b) => new Date(b.attributes.createdAt) - new Date(a.attributes.createdAt))
+              .map((comment) => (
+                <div key={comment.id} className="bg-white rounded-lg shadow-md p-4 mb-4">
+                  <div className="flex items-center space-x-4 mb-2">
+                    <img
+                      className="w-12 h-12 rounded-full object-cover"
+                      src={`http://localhost:1337${blog.attributes.authorImg.data.attributes.url}`}
+                      alt={blog.attributes?.Name}
+                    />
+                    <div>
+                      <h3 className="text-lg font-semibold mb-2">{comment.attributes?.Name}</h3>
+                      <p className="text-gray-600 text-sm">
+                        {comment.attributes?.Comment?.[0]?.children?.[0]?.text}
+                      </p>
+                    </div>
                   </div>
+                  {/* <p className="text-gray-500 text-xs">{new Date(comment.attributes?.createdAt).toLocaleString()}</p> */}
+                  <p className="text-gray-500 text-xs">
+                    {timeAgo(comment.attributes?.createdAt).toLocaleString()}
+                  </p>
                 </div>
-                {/* <p className="text-gray-500 text-xs">{new Date(comment.attributes?.createdAt).toLocaleString()}</p> */}
-                <p className="text-gray-500 text-xs">
-                  {timeAgo(comment.attributes?.createdAt).toLocaleString()}
-                </p>
-              </div>
-            ))}
+              ))}
           </div>
+
         </div>
       </div>
     </div>
