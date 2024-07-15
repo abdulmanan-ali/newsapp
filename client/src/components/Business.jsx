@@ -6,7 +6,7 @@ import ServerError from './ServerError';
 import { useTranslation } from 'react-i18next';
 
 
-const News = ({ locale }) => {
+const Business = ({ locale }) => {
 
     const { t, i18n } = useTranslation();
 
@@ -54,4 +54,4 @@ const News = ({ locale }) => {
     );
 };
 
-export default News;
+export default Business;

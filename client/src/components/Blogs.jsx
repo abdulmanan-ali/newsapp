@@ -39,23 +39,33 @@ const Blog = ({ blogData, locale }) => {
       )
     ),
     left:
-      blogData?.data?.filter((blog) =>
-        blog.attributes.divisions.data.some(
-          (division) =>
-            division.attributes.Name === "home-top-left-1" ||
-            division.attributes.Name === "home-top-left-2"
+      blogData?.data
+        ?.filter((blog) =>
+          blog.attributes.divisions.data.some(
+            (division) =>
+              division.attributes.Name === "home-top-left-1" ||
+              division.attributes.Name === "home-top-left-2"
+          )
         )
-      ) || [],
+        .sort(
+          (a, b) =>
+            new Date(b.attributes.updatedAt) - new Date(a.attributes.updatedAt)
+        ) || [],
     right:
-      blogData?.data?.filter((blog) =>
-        blog.attributes.divisions.data.some(
-          (division) =>
-            division.attributes.Name === "home-top-right-1" ||
-            division.attributes.Name === "home-top-right-2" ||
-            division.attributes.Name === "home-top-right-3" ||
-            division.attributes.Name === "home-top-right-4"
+      blogData?.data
+        ?.filter((blog) =>
+          blog.attributes.divisions.data.some(
+            (division) =>
+              division.attributes.Name === "home-top-right-1" ||
+              division.attributes.Name === "home-top-right-2" ||
+              division.attributes.Name === "home-top-right-3" ||
+              division.attributes.Name === "home-top-right-4"
+          )
         )
-      ) || [],
+        .sort(
+          (a, b) =>
+            new Date(b.attributes.updatedAt) - new Date(a.attributes.updatedAt)
+        ) || [],
   };
 
   // Combine all articles from the upper grid section
@@ -66,7 +76,7 @@ const Blog = ({ blogData, locale }) => {
   ].filter(Boolean); // Filter out undefined values
 
   // Extract IDs of upper grid articles
-  const upperGridArticleIds = upperGridArticles.map(article => article.id);
+  const upperGridArticleIds = upperGridArticles.map((article) => article.id);
 
   // Filter out articles that are already in the upper grid section
   const filteredBlogData = blogData?.data?.filter(
@@ -74,8 +84,10 @@ const Blog = ({ blogData, locale }) => {
   );
 
   // Sort the filtered blog data by updatedAt in descending order
-  const sortedFilteredBlogData = filteredBlogData.sort((a, b) => new Date(b.attributes.updatedAt) - new Date(a.attributes.updatedAt));
-
+  const sortedFilteredBlogData = filteredBlogData.sort(
+    (a, b) =>
+      new Date(b.attributes.updatedAt) - new Date(a.attributes.updatedAt)
+  );
 
   return (
     <>
@@ -88,13 +100,15 @@ const Blog = ({ blogData, locale }) => {
               {articles.left.map((article, index) => (
                 <div key={index} className="mb-8">
                   <Link
-                    to={`/${locale}/${article.attributes.category.data.attributes.Name.toLowerCase()}/${article.attributes.slug
-                      }`}
+                    to={`/${locale}/${article.attributes.category.data.attributes.Name.toLowerCase()}/${
+                      article.attributes.slug
+                    }`}
                   >
                     <Link
                       className="hover:underline hover:text-red-700"
-                      to={`/${locale}/${article.attributes.category.data.attributes.Name.toLowerCase()}/${article.attributes.slug
-                        }`}
+                      to={`/${locale}/${article.attributes.category.data.attributes.Name.toLowerCase()}/${
+                        article.attributes.slug
+                      }`}
                     >
                       <img
                         src={`http://localhost:1337${article.attributes.coverImage.data.attributes.url}`}
@@ -121,13 +135,15 @@ const Blog = ({ blogData, locale }) => {
               {articles.main && (
                 <div className="mb-8">
                   <Link
-                    to={`/${locale}/${articles.main.attributes.category.data.attributes.Name.toLowerCase()}/${articles.main.attributes.slug
-                      }`}
+                    to={`/${locale}/${articles.main.attributes.category.data.attributes.Name.toLowerCase()}/${
+                      articles.main.attributes.slug
+                    }`}
                   >
                     <Link
                       className="hover:underline hover:text-red-700"
-                      to={`/${locale}/${articles.main.attributes.category.data.attributes.Name.toLowerCase()}/${articles.main.attributes.slug
-                        }`}
+                      to={`/${locale}/${articles.main.attributes.category.data.attributes.Name.toLowerCase()}/${
+                        articles.main.attributes.slug
+                      }`}
                     >
                       <img
                         src={`http://localhost:1337${articles.main.attributes.coverImage.data.attributes.url}`}
@@ -153,15 +169,14 @@ const Blog = ({ blogData, locale }) => {
               {articles.right.map((article, index) => (
                 <div key={index} className="mb-4">
                   <Link
-                    to={`/${locale}/${article.attributes.category.data.attributes.Name.toLowerCase()}/${article.attributes.slug
-                      }`}
+                    to={`/${locale}/${article.attributes.category.data.attributes.Name.toLowerCase()}/${
+                      article.attributes.slug
+                    }`}
                   >
                     <h2 className="text-xl font-bold mb-2 hover:underline hover:text-red-700">
                       {article.attributes.blogTitle}
                     </h2>
-                    <p className="mt-2 mb-2">
-                      {article.attributes.blogDesc}
-                    </p>
+                    <p className="mt-2 mb-2">{article.attributes.blogDesc}</p>
                     <p className="text-gray-600 text-sm mt-4">
                       {timeAgo(article.attributes.updatedAt)} |{" "}
                       {article.attributes.category.data.attributes.Name}
@@ -256,9 +271,11 @@ const Blog = ({ blogData, locale }) => {
                       sortedFilteredBlogData.map((blog) => (
                         <Link
                           key={blog.id}
-                          to={`/${blog.attributes.locale
-                            }/${blog.attributes.category.data.attributes.Name.toLowerCase()}/${blog.attributes.slug
-                            }`}
+                          to={`/${
+                            blog.attributes.locale
+                          }/${blog.attributes.category.data.attributes.Name.toLowerCase()}/${
+                            blog.attributes.slug
+                          }`}
                         >
                           <div className="bg-white rounded-xl overflow-hidden drop-shadow-md group">
                             <img

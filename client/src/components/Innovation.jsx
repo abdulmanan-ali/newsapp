@@ -6,7 +6,7 @@ import ServerError from './ServerError';
 import { useTranslation } from 'react-i18next';
 
 
-const Culture = ({ locale }) => {
+const Innovation = ({ locale }) => {
     const { t, i18n } = useTranslation();
 
 
@@ -54,4 +54,4 @@ const Culture = ({ locale }) => {
     );
 };
 
-export default Culture;
+export default Innovation;
